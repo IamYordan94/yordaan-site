@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://yordaan.com/</loc></url>
-  <url><loc>https://yordaan.com/artworks</loc></url>
-  <url><loc>https://yordaan.com/tickets</loc></url>
-  <url><loc>https://yordaan.com/dates</loc></url>
-  <url><loc>https://yordaan.com/cruises</loc></url>
-  <url><loc>https://yordaan.com/route</loc></url>
-  <url><loc>https://yordaan.com/practical</loc></url>
+  <url>
+    <loc>https://yordaan.com/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://yordaan.com/privacy.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://yordaan.com/terms.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <priority>0.5</priority>
+  </url>
 </urlset>
