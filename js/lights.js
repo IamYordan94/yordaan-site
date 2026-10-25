@@ -66,12 +66,12 @@
 
   function build() {
     var narrow = W < 700;
-    var top = H * (narrow ? 0.10 : 0.11);
+    var top = H * (narrow ? 0.14 : 0.16);
     var band = bandHeight();
 
     var poles = narrow ? 3 : 4;
-    var sag = band * (narrow ? 0.62 : 0.58);
-    var perSwag = narrow ? 7 : 11;
+    var sag = band * (narrow ? 0.52 : 0.50);
+    var perSwag = narrow ? 6 : 9;
 
     front = [];
     var opts = { run: 0, index: 0, accentEvery: 7 };
@@ -116,13 +116,13 @@
     if (alpha <= 0.02) return;
 
     if (glow > 0.02) {
-      var g = ctx.createRadialGradient(x, y, 0, x, y, radius * 9);
-      g.addColorStop(0, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.55 * glow * alpha) + ')');
-      g.addColorStop(0.35, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.16 * glow * alpha) + ')');
+      var g = ctx.createRadialGradient(x, y, 0, x, y, radius * 4.2);
+      g.addColorStop(0, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.80 * glow * alpha) + ')');
+      g.addColorStop(0.5, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.22 * glow * alpha) + ')');
       g.addColorStop(1, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',0)');
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(x, y, radius * 9, 0, Math.PI * 2);
+      ctx.arc(x, y, radius * 4.2, 0, Math.PI * 2);
       ctx.fill();
     }
 
@@ -166,17 +166,29 @@
       if (b.ign < 1) b.ign = Math.min(1, b.ign + dt / 380);
 
       var sway2 = Math.sin(now / 3000 + b.phase) * 2.1;
-      var x = b.x, y = b.y + sway2;
+      var cableY = b.y + sway2;
+      var by = cableY + 12;            // the bulb hangs below the cable, on a short stem
+      var x = b.x;
 
       var breathe = 0.80 + 0.20 * Math.sin(now / 1100 + b.phase);
-      var near = Math.hypot(pointer.x - x, pointer.y - y);
+      var near = Math.hypot(pointer.x - x, pointer.y - by);
       var pull = near < 210 ? (1 - near / 210) : 0;
 
-      var radius = 7.6 * (1 + pull * 0.28);
+      var radius = 7.2 * (1 + pull * 0.25);
       var alpha = breathe * b.ign + pull * 0.2;
-      var glow = (0.62 + 0.38 * breathe) * b.ign + pull * 1.2;
+      var glow = (0.62 + 0.38 * breathe) * b.ign + pull * 1.0;
 
-      bulb(x, y, radius, b.colour, alpha, glow);
+      // stem, so the bulb reads as hanging from the cable rather than floating
+      if (b.ign > 0.05) {
+        ctx.strokeStyle = 'rgba(11,11,12,' + (0.45 * b.ign) + ')';
+        ctx.lineWidth = 1.1;
+        ctx.beginPath();
+        ctx.moveTo(x, cableY);
+        ctx.lineTo(x, by - radius * 0.85);
+        ctx.stroke();
+      }
+
+      bulb(x, by, radius, b.colour, alpha, glow);
     }
 
     // The install head: where the cable is currently being pulled.

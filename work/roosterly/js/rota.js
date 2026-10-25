@@ -10,6 +10,7 @@
   if (!grid) return;
 
   var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var DATES = [12, 13, 14, 15, 16, 17, 18];   // week 42, 12–18 October
   var CREWS = ['Crew 1', 'Crew 2', 'Crew 3', 'Crew 4'];
 
   /* shifts[crew][day]: hours as written on a rota, or null for a day off. */
@@ -59,7 +60,10 @@
     grid.appendChild(make('div', 'r-corner', 'crew'));
 
     for (var d = 0; d < DAYS.length; d++) {
-      grid.appendChild(make('div', 'r-day', DAYS[d]));
+      var dayCell = make('div', 'r-day');
+      dayCell.appendChild(make('span', '', DAYS[d]));
+      dayCell.appendChild(make('small', '', String(DATES[d])));
+      grid.appendChild(dayCell);
     }
 
     for (var c = 0; c < CREWS.length; c++) {
@@ -86,6 +90,11 @@
 
     gapFlag = make('div', 'gap-flag', 'gap');
     cells[GAP.crew][GAP.day].appendChild(gapFlag);
+
+    var countEl = document.getElementById('rota-count');
+    if (countEl) countEl.textContent = String(blocks.length);
+    var gapCountEl = document.getElementById('rota-gap');
+    if (gapCountEl) gapCountEl.textContent = '1';
 
     grid.classList.add('is-built');
   }

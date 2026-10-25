@@ -181,12 +181,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   position:relative;
 }
 .rota .r-day{
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:center;gap:.24rem;
   font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--ink);
   background:#fbfbfc;
   box-shadow:inset 0 -1px 0 var(--ink);
   padding-bottom:1px;
+}
+.r-day small{
+  display:none;
+  font-size:.5rem;letter-spacing:0;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
 }
 .rota .r-corner{
   background:#fbfbfc;
@@ -244,6 +250,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 }
 .rota.is-built .rota-noscript{display:none}
 
+.rota-foot{
+  display:flex;flex-wrap:wrap;
+  gap:.3rem 1rem;
+  justify-content:space-between;
+  align-items:baseline;
+  margin:0;
+  padding:.6rem .7rem;
+  border-top:1px solid var(--rule);
+  font-size:.56rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.rota-foot b{color:var(--ink);font-weight:600}
+
 .rota-figure figcaption{
   margin-top:.8rem;
   font-size:.8rem;
@@ -254,24 +276,20 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .cap-strong{color:var(--ink)}
 
 /* ---------- section head ---------- */
-section{padding-block:clamp(2.25rem,5vw,4rem)}
+section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 .section-head{
-  display:grid;
-  grid-template-columns:auto minmax(0,1fr);
-  gap:.4rem 1.25rem;
-  align-items:baseline;
   padding-bottom:1.5rem;
   border-bottom:1px solid var(--ink);
   margin-bottom:clamp(1.25rem,3vw,2.25rem);
 }
 .marker{
+  display:block;
+  margin:0 0 .65rem;
   font-size:.7rem;letter-spacing:.16em;
   color:var(--accent);
   font-variant-numeric:tabular-nums;
-  grid-row:1;
 }
 .section-head h2{
-  grid-row:1;
   font-family:var(--display);
   font-weight:400;
   font-size:clamp(1.6rem,1.25rem + 2vw,2.6rem);
@@ -280,8 +298,7 @@ section{padding-block:clamp(2.25rem,5vw,4rem)}
   margin:0;
 }
 .section-head p{
-  grid-column:2;
-  margin:.5rem 0 0;
+  margin:.65rem 0 0;
   max-width:56ch;
   color:var(--muted);
   font-size:.94rem;
@@ -345,6 +362,12 @@ section{padding-block:clamp(2.25rem,5vw,4rem)}
   background:var(--ink);
   padding:.32rem .6rem;
 }
+.status-note{
+  margin:.9rem 0 0;
+  font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);
+  line-height:1.9;
+}
 .status-body p{margin:0 0 1rem;max-width:64ch}
 .status-body p:last-child{margin-bottom:0}
 .status-block a{text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:1px}
@@ -402,7 +425,9 @@ section{padding-block:clamp(2.25rem,5vw,4rem)}
   .rota-head{padding:.75rem .9rem}
   .rota-label{font-size:.64rem}
   .legend li{font-size:.6rem}
-  .rota .r-day{font-size:.62rem}
+  .rota .r-day{font-size:.62rem;gap:.3rem}
+  .r-day small{display:inline;font-size:.54rem}
+  .rota-foot{padding:.7rem .9rem;font-size:.6rem}
   .rota .r-crew{font-size:.64rem;padding-left:.6rem}
   .rota .r-corner{font-size:.56rem;padding-left:.6rem}
   .rota .r-cell{padding:3px}

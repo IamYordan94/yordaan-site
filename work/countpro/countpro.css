@@ -244,14 +244,6 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   max-width:64ch;
   color:var(--muted);
 }
-.aside{
-  margin:clamp(1.5rem,3vw,2rem) 0 0;
-  max-width:60ch;
-  font-size:.92rem;
-  line-height:1.62;
-  color:var(--muted);
-}
-
 /* ---------- prose ---------- */
 .prose p{margin:0;max-width:62ch}
 
@@ -285,6 +277,16 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
 }
 .cta-link span[aria-hidden]{color:var(--accent);font-size:.66em;vertical-align:.3em;margin-left:.12em}
 .cta-link:hover{color:var(--accent)}
+
+/* ---------- the site-wide light strand ----------
+   Shared with the other product pages. Kept, but given room: on this page its
+   default negative bottom margin collided with the footer rule, and 1200px is
+   wider than this page's content column. */
+.strand-divider{
+  width:calc(100% - 2 * var(--gut));
+  max-width:calc(var(--wrap) - 2 * var(--gut));
+  margin:clamp(2rem,4vw,3rem) auto 1.75rem;
+}
 
 /* ---------- footer ---------- */
 .site-footer{

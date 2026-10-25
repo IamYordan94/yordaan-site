@@ -34,9 +34,4 @@
   for (var j = 0; j < steps.length; j++) {
     io.observe(steps[j]);
   }
-
-  // If anything goes wrong above, the sequence must still read as a sequence.
-  window.setTimeout(function () {
-    if (!document.querySelector('.step.is-lit')) { lightAll(); }
-  }, 6000);
 })();

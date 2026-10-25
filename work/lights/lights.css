@@ -101,7 +101,7 @@ a:focus-visible,button:focus-visible{
 
 .scene{
   position:relative;
-  height:clamp(230px,44vh,440px);
+  height:clamp(240px,46vh,470px);
   margin-bottom:clamp(1.6rem,4vw,2.75rem);
 }
 #facade{
@@ -114,11 +114,11 @@ a:focus-visible,button:focus-visible{
 .scene::after{
   content:"";
   position:absolute;left:0;right:0;bottom:0;
-  height:42%;
+  height:36%;
   background:linear-gradient(to bottom,
     rgba(11,11,12,0) 0%,
-    rgba(11,11,12,.55) 52%,
-    rgba(11,11,12,.94) 84%,
+    rgba(11,11,12,.38) 44%,
+    rgba(11,11,12,.86) 78%,
     var(--paper) 100%);
   pointer-events:none;
   z-index:1;
@@ -416,11 +416,12 @@ section{padding-block:clamp(2.5rem,5vw,4.25rem)}
 @media (max-width:640px){
   .top-kvk{display:none}
   .top{gap:0}
-  .top-inner{gap:.9rem}
-  .top nav{margin-left:0;gap:1.15rem;width:100%}
-  .top nav a{font-size:.72rem}
-  .scene{height:clamp(210px,38vh,320px)}
-  .scene-cap{font-size:.62rem;letter-spacing:.12em}
+  .top-inner{gap:.85rem}
+  .top nav{margin-left:0;gap:1.2rem;width:100%}
+  .top nav a{font-size:.73rem;padding-block:.55rem}
+  .scene{height:clamp(215px,40vh,330px)}
+  .scene-cap{font-size:.6rem;letter-spacing:.1em}
+  .step-num{font-size:.75rem}
 }
 
 @media (prefers-reduced-motion:reduce){

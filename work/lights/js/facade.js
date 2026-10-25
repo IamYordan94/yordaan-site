@@ -101,7 +101,10 @@
 
       var roof = roofMin + rand() * (roofMax - roofMin);
       var tone = tones[i % tones.length];
-      blocks.push({ x0: x0, x1: x1, roof: roof, top: tone[0], bottom: tone[1] });
+      blocks.push({
+        x0: x0, x1: x1, roof: roof, top: tone[0], bottom: tone[1],
+        fascia: H * 0.715, shopTop: H * 0.755
+      });
 
       // Windows: a few large rectangles, not a grid of dots.
       var inset = bw2 * 0.10;
@@ -110,11 +113,11 @@
       var colPitch = usable / cols;
       var ww = Math.max(9, colPitch * 0.5);
 
-      var rows = H < 250 ? 1 : (H < 360 ? 2 : 3);
-      var topY = roof + H * 0.12;
-      var bottomY = H * 0.96;
+      var rows = H < 250 ? 1 : 2;
+      var topY = roof + H * 0.115;
+      var bottomY = H * 0.665;
       var rowPitch = Math.max(20, (bottomY - topY) / rows);
-      var wh = clamp(rowPitch * 0.5, 9, ww * 1.8);
+      var wh = clamp(rowPitch * 0.46, 9, ww * 1.7);
 
       for (j = 0; j < rows; j++) {
         for (c = 0; c < cols; c++) {
@@ -161,19 +164,19 @@
 
   function drawSky() {
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, '#09090b');
-    g.addColorStop(0.55, '#0c0c12');
-    g.addColorStop(1, '#0b0b0c');
+    g.addColorStop(0, '#08080a');
+    g.addColorStop(0.45, '#0c0e16');
+    g.addColorStop(1, '#0e1018');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
 
     // City glow, sitting low behind the rooftops.
     var glow = ctx.createRadialGradient(
-      W * 0.62, H * 0.34, 0,
-      W * 0.62, H * 0.34, W * 0.72
+      W * 0.58, H * 0.30, 0,
+      W * 0.58, H * 0.30, W * 0.62
     );
-    glow.addColorStop(0, 'rgba(46,54,96,0.18)');
-    glow.addColorStop(0.55, 'rgba(30,36,70,0.07)');
+    glow.addColorStop(0, 'rgba(62,74,132,0.30)');
+    glow.addColorStop(0.5, 'rgba(38,46,88,0.14)');
     glow.addColorStop(1, 'rgba(10,10,14,0)');
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, W, H);
@@ -181,15 +184,24 @@
 
   function drawBackdrop() {
     var i;
-    ctx.fillStyle = '#0f0f15';
+    ctx.fillStyle = '#17171f';
     for (i = 0; i < backdrop.length; i++) {
       var b = backdrop[i];
       ctx.fillRect(b.x, b.y, b.w, b.h);
     }
-    ctx.fillStyle = 'rgba(255,255,255,0.035)';
+    ctx.fillStyle = 'rgba(255,255,255,0.07)';
     for (i = 0; i < backdrop.length; i++) {
       var d = backdrop[i];
       ctx.fillRect(d.x, d.y, d.w, 1);
+    }
+    // a few far windows, unlit but catching the sky
+    ctx.fillStyle = 'rgba(140,160,220,0.055)';
+    for (i = 0; i < backdrop.length; i++) {
+      var e = backdrop[i];
+      for (var k = 0; k < 3; k++) {
+        ctx.fillRect(e.x + e.w * (0.2 + k * 0.25), e.y + 10 + (k * 7) % 14,
+          Math.max(2, e.w * 0.09), Math.max(2, e.w * 0.09));
+      }
     }
   }
 
@@ -200,23 +212,66 @@
 
       var g = ctx.createLinearGradient(0, b.roof, 0, H);
       g.addColorStop(0, b.top);
+      g.addColorStop(0.55, b.top);
       g.addColorStop(1, b.bottom);
       ctx.fillStyle = g;
       ctx.fillRect(b.x0, b.roof, w, H - b.roof);
 
-      // cornice: a light band with a shadow under it
-      ctx.fillStyle = 'rgba(255,255,255,0.075)';
+      // cornice: a light band, a shadow under it, warm light catching the lip
+      ctx.fillStyle = 'rgba(255,236,206,0.16)';
       ctx.fillRect(b.x0, b.roof, w, 2);
-      ctx.fillStyle = 'rgba(0,0,0,0.55)';
-      ctx.fillRect(b.x0, b.roof + 2, w, 3);
+      ctx.fillStyle = 'rgba(0,0,0,0.62)';
+      ctx.fillRect(b.x0, b.roof + 2, w, 4);
 
       // party walls between buildings
-      ctx.fillStyle = 'rgba(0,0,0,0.5)';
+      ctx.fillStyle = 'rgba(0,0,0,0.55)';
       ctx.fillRect(b.x0, b.roof, 1.5, H - b.roof);
       ctx.fillRect(b.x1 - 1.5, b.roof, 1.5, H - b.roof);
-      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
       ctx.fillRect(b.x0 + 1.5, b.roof, 1, H - b.roof);
       ctx.fillRect(b.x1 - 2.5, b.roof, 1, H - b.roof);
+    }
+  }
+
+  /* the ground floor: closed shopfronts, which is what sets the scale */
+  function drawShopfronts() {
+    for (var i = 0; i < blocks.length; i++) {
+      var b = blocks[i];
+      var w = b.x1 - b.x0;
+
+      // fascia band over the shopfronts
+      ctx.fillStyle = 'rgba(255,255,255,0.05)';
+      ctx.fillRect(b.x0, b.fascia, w, 3);
+      ctx.fillStyle = 'rgba(0,0,0,0.45)';
+      ctx.fillRect(b.x0, b.fascia + 3, w, 2);
+
+      var inset = w * 0.06;
+      var gap = w * 0.03;
+      var pw = (w - inset * 2 - gap) / 2;
+      var sh = H - b.shopTop;
+
+      for (var p = 0; p < 2; p++) {
+        var sx = b.x0 + inset + p * (pw + gap);
+
+        var g = ctx.createLinearGradient(0, b.shopTop, 0, b.shopTop + sh);
+        g.addColorStop(0, '#161a26');
+        g.addColorStop(0.45, '#0d0f16');
+        g.addColorStop(1, '#090a0e');
+        ctx.fillStyle = g;
+        ctx.fillRect(sx, b.shopTop, pw, sh);
+
+        // the street, reflected in the glass
+        var r = ctx.createLinearGradient(sx, b.shopTop, sx + pw, b.shopTop + sh);
+        r.addColorStop(0, 'rgba(150,175,235,0.055)');
+        r.addColorStop(0.5, 'rgba(150,175,235,0.012)');
+        r.addColorStop(1, 'rgba(150,175,235,0.04)');
+        ctx.fillStyle = r;
+        ctx.fillRect(sx, b.shopTop, pw, sh);
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.055)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(sx + 0.5, b.shopTop + 0.5, pw - 1, sh - 1);
+      }
     }
   }
 
@@ -225,14 +280,22 @@
       var win = windows[i];
       var lit = clamp((progress - win.at) / 0.12, 0, 1);
 
-      ctx.fillStyle = 'rgba(5,5,8,0.92)';
+      ctx.fillStyle = 'rgba(6,6,10,0.95)';
+      ctx.fillRect(win.x, win.y, win.w, win.h);
+
+      // glass catching the sky, whether or not the room behind is lit
+      var sky = ctx.createLinearGradient(win.x, win.y, win.x, win.y + win.h);
+      sky.addColorStop(0, 'rgba(150,170,225,0.075)');
+      sky.addColorStop(0.45, 'rgba(120,140,200,0.02)');
+      sky.addColorStop(1, 'rgba(120,140,200,0.05)');
+      ctx.fillStyle = sky;
       ctx.fillRect(win.x, win.y, win.w, win.h);
 
       if (lit > 0.01) {
-        var a = (0.10 + 0.17 * lit) * win.tone;
+        var a = (0.16 + 0.24 * lit) * win.tone;
         var g = ctx.createLinearGradient(win.x, win.y, win.x, win.y + win.h);
-        g.addColorStop(0, 'rgba(255,226,176,' + (a * 1.15).toFixed(3) + ')');
-        g.addColorStop(1, 'rgba(255,198,124,' + (a * 0.35).toFixed(3) + ')');
+        g.addColorStop(0, 'rgba(255,230,186,' + (a * 1.15).toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(255,200,128,' + (a * 0.4).toFixed(3) + ')');
         ctx.fillStyle = g;
         ctx.fillRect(win.x, win.y, win.w, win.h);
 
@@ -246,7 +309,7 @@
         var cy = win.y + win.h / 2;
         var rr = Math.max(win.w, win.h) * 2;
         var s = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr);
-        s.addColorStop(0, 'rgba(255,214,150,' + (0.09 * lit).toFixed(3) + ')');
+        s.addColorStop(0, 'rgba(255,214,150,' + (0.14 * lit).toFixed(3) + ')');
         s.addColorStop(1, 'rgba(255,214,150,0)');
         ctx.fillStyle = s;
         ctx.beginPath();
@@ -254,12 +317,12 @@
         ctx.fill();
       }
 
-      ctx.strokeStyle = 'rgba(255,255,255,' + (0.05 + 0.09 * lit).toFixed(3) + ')';
+      ctx.strokeStyle = 'rgba(255,255,255,' + (0.075 + 0.10 * lit).toFixed(3) + ')';
       ctx.lineWidth = 1;
       ctx.strokeRect(win.x + 0.5, win.y + 0.5, win.w - 1, win.h - 1);
 
       // a lintel above each window, so the facade reads as masonry
-      ctx.fillStyle = 'rgba(255,255,255,0.05)';
+      ctx.fillStyle = 'rgba(255,255,255,0.07)';
       ctx.fillRect(win.x - 1, win.y - 2, win.w + 2, 1);
     }
   }
@@ -292,8 +355,8 @@
     // cable, drawn quickly first so the bulbs have something to hang from
     var cableA = clamp(progress / 0.14, 0, 1);
     if (cableA > 0.01) {
-      ctx.strokeStyle = 'rgba(0,0,0,' + (0.55 * cableA).toFixed(3) + ')';
-      ctx.lineWidth = 1.4;
+      ctx.strokeStyle = 'rgba(0,0,0,' + (0.62 * cableA).toFixed(3) + ')';
+      ctx.lineWidth = 1.6;
       ctx.beginPath();
       for (px = -18; px <= W + 18; px += 5) {
         py = cableY(px);
@@ -301,8 +364,8 @@
       }
       ctx.stroke();
 
-      ctx.strokeStyle = 'rgba(255,255,255,' + (0.055 * cableA).toFixed(3) + ')';
-      ctx.lineWidth = 0.6;
+      ctx.strokeStyle = 'rgba(255,214,150,' + (0.16 * cableA).toFixed(3) + ')';
+      ctx.lineWidth = 0.7;
       ctx.beginPath();
       for (px = -18; px <= W + 18; px += 5) {
         py = cableY(px) - 0.9;
