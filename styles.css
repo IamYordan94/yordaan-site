@@ -269,8 +269,12 @@ section { padding: clamp(2.75rem, 6vw, 5rem) 0; }
   margin: clamp(2rem, 4vw, 3rem) 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+@media (min-width: 1000px) {
+  .services { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 .services li {
@@ -297,6 +301,47 @@ section { padding: clamp(2.75rem, 6vw, 5rem) 0; }
   margin: 0;
   color: var(--muted);
   font-size: 0.97rem;
+}
+
+/* locations list */
+
+.places {
+  list-style: none;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 0 clamp(1.75rem, 4vw, 3.5rem);
+}
+
+.places li {
+  border-top: 1px solid var(--rule);
+  padding: 0.8rem 0;
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.35rem 0.9rem;
+  align-items: baseline;
+  font-size: 0.95rem;
+}
+
+.places span {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* plain prose block */
+
+.prose {
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  max-width: var(--measure);
+}
+
+.prose p {
+  margin: 0 0 1rem;
+  color: var(--muted);
 }
 
 /* steps */
@@ -490,8 +535,13 @@ section { padding: clamp(2.75rem, 6vw, 5rem) 0; }
 
 .doc-body h3 { font-size: 1.02rem; margin: 1.6rem 0 0.4rem; }
 .doc-body p, .doc-body li { color: #23262b; }
-.doc-body ul { padding-left: 1.15rem; }
+.doc-body ul, .doc-body ol { padding-left: 1.25rem; }
 .doc-body li { margin-bottom: 0.4rem; }
+
+.address-block {
+  line-height: 1.8;
+  margin: 1rem 0 1.4rem;
+}
 
 .doc-body table {
   border-collapse: collapse;
