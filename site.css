@@ -86,16 +86,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .hero{
   position:relative;
   overflow:hidden;
-  min-height:min(92vh,880px);
-  display:flex;
-  align-items:flex-end;
-  padding-block:clamp(1.5rem,4vw,3rem);
+  /* the scene gets its own band at the top; the type can never collide with it */
+  --band:min(46vh,420px);
+  padding-top:calc(var(--band) - 1.5rem);
+  padding-bottom:clamp(2rem,4vw,3.5rem);
 }
 #lights{
   position:absolute;
-  inset:0;
+  top:0;
+  left:0;
   width:100%;
-  height:100%;
+  height:var(--band);
   display:block;
   pointer-events:none;
 }
