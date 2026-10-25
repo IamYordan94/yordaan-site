@@ -183,7 +183,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 section{padding-block:clamp(2.5rem,5vw,4.5rem)}
 .section-head{
   display:grid;
-  grid-template-columns:auto minmax(0,1fr);
+  grid-template-columns:2.2rem minmax(0,1fr);
   gap:.35rem 1.25rem;
   align-items:baseline;
   padding-bottom:1.5rem;
@@ -246,14 +246,17 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
 }
 /* ---------- prose ---------- */
 .prose p{margin:0;max-width:62ch}
+@media (min-width:760px){
+  /* Body copy under a section heading lines up with the heading, not the rail. */
+  .prose{padding-left:calc(2.2rem + 1.25rem)}
+}
 
 /* ---------- the link ---------- */
 .cta{
-  border-top:1px solid var(--ink);
   border-bottom:1px solid var(--rule);
   padding-block:clamp(2rem,4vw,3.25rem);
 }
-.cta .section-head{border-bottom:0;padding-bottom:0;margin-bottom:0}
+.cta .section-head{margin-bottom:0}
 .cta h2{
   margin:0;
   font-family:var(--display);

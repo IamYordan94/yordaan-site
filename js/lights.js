@@ -1,11 +1,15 @@
 /* The lights install themselves.
-   Festoon swags strung between poles above the headline: the cable is pulled
-   across, each bulb ignites as the cable reaches it, then the whole run breathes
-   and leans towards the pointer. Vanilla canvas, no dependencies.
+   Festoon swags strung above the headline: the cable is pulled across, each bulb
+   ignites as the cable reaches it, then the whole run breathes and leans towards
+   the pointer. Vanilla canvas, no dependencies.
 
-   Composition rule: the scene lives in the TOP band of the hero and never
-   reaches the headline. Drawing across the type made it read as a stray
-   hairline, which is exactly what it must not do. */
+   Two rules learned the hard way:
+   1. The scene lives in its own band. Drawn across the type it read as a stray
+      hairline, so the hero reserves space for it instead.
+   2. A backgrounded tab throttles requestAnimationFrame to a standstill. Mixing
+      a fallback paint with a half-stalled loop left three bulbs on screen, so
+      once the loop is judged dead the scene switches to a static finished run
+      and stays there until the tab is visible again. */
 
 (function () {
   'use strict';
@@ -17,205 +21,196 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var W = 0, H = 0, dpr = 1;
-  var front = [];       // the run being installed
-  var back = [];        // a fainter run further away, for depth
-  var progress = reduce ? 1 : 0;
-  var startedAt = 0;
-  var raf = 0, watchdog = 0, last = 0;
+  var front = [], back = [];
+  var progress = 0;
+  var startedAt = 0, last = 0, watchdog = 0;
+  var staticMode = reduce;       // draw the finished run, no animation
   var pointer = { x: -9999, y: -9999 };
 
-  var INSTALL_MS = 3000;
-  var WARM = [247, 154, 43];     // amber: needs saturation to read on white
-  var HOT = [255, 238, 200];     // the lit filament
+  var INSTALL_MS = 3200;
+  var WARM = [232, 132, 18];     // saturared amber: reads on white
+  var CORE = [255, 246, 224];
   var ACCENT = [31, 58, 224];
-
-  function bandHeight() {
-    // The scene owns the top of the hero: 30% on phones, 46% on wider screens.
-    return H * (W < 700 ? 0.34 : 0.46);
-  }
+  var STEM = 'rgba(11,11,12,';
 
   function size() {
     var rect = canvas.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = Math.max(320, Math.round(rect.width));
-    H = Math.max(240, Math.round(rect.height));
+    H = Math.max(180, Math.round(rect.height));
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     build();
   }
 
-  // One swag: a catenary between two x positions, hanging `sag` below `top`.
-  function swag(x0, x1, top, sag, n, into, opts) {
-    for (var i = 0; i < n; i++) {
-      var t = i / (n - 1);
-      var x = x0 + (x1 - x0) * t;
-      var y = top + Math.sin(Math.PI * t) * sag;
-      into.push({
-        x: x,
-        y: y,
-        t: t,
-        run: opts.run,
-        colour: (opts.accentEvery && opts.index % opts.accentEvery === opts.accentEvery - 1) ? ACCENT : WARM,
-        phase: Math.random() * Math.PI * 2,
-        ign: -1
-      });
-      opts.index++;
-    }
-  }
-
   function build() {
     var narrow = W < 700;
-    var top = H * (narrow ? 0.14 : 0.16);
-    var band = bandHeight();
-
+    var top = H * (narrow ? 0.16 : 0.18);
+    var sag = H * (narrow ? 0.34 : 0.42);
     var poles = narrow ? 3 : 4;
-    var sag = band * (narrow ? 0.52 : 0.50);
     var perSwag = narrow ? 6 : 9;
 
     front = [];
-    var opts = { run: 0, index: 0, accentEvery: 7 };
+    var index = 0;
     for (var s = 0; s < poles; s++) {
       var x0 = -W * 0.06 + (W * 1.12) * (s / poles);
       var x1 = -W * 0.06 + (W * 1.12) * ((s + 1) / poles);
-      swag(x0, x1, top, sag, perSwag, front, opts);
+      for (var i = 0; i < perSwag; i++) {
+        var t = i / (perSwag - 1);
+        front.push({
+          x: x0 + (x1 - x0) * t,
+          y: top + Math.sin(Math.PI * t) * sag,
+          t: t,
+          colour: (index % 7 === 6) ? ACCENT : WARM,
+          phase: Math.random() * Math.PI * 2,
+          ign: 0,
+          swag: s
+        });
+        index++;
+      }
     }
 
+    // A fainter run further back sells the depth.
     back = [];
-    var bopts = { run: 1, index: 0, accentEvery: 0 };
-    var bper = narrow ? 6 : 9;
-    for (var b = 0; b < poles; b++) {
-      var bx0 = -W * 0.10 + (W * 1.2) * (b / poles);
-      var bx1 = -W * 0.10 + (W * 1.2) * ((b + 1) / poles);
-      swag(bx0, bx1, H * 0.035, band * 0.34, bper, back, bopts);
+    var bpoles = narrow ? 2 : 3;
+    for (var b = 0; b < bpoles; b++) {
+      var bx0 = -W * 0.12 + (W * 1.24) * (b / bpoles);
+      var bx1 = -W * 0.12 + (W * 1.24) * ((b + 1) / bpoles);
+      for (var j = 0; j < (narrow ? 5 : 7); j++) {
+        var bt = j / ((narrow ? 5 : 7) - 1);
+        back.push({
+          x: bx0 + (bx1 - bx0) * bt,
+          y: H * 0.05 + Math.sin(Math.PI * bt) * H * 0.16,
+          t: bt,
+          swag: b,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
     }
   }
 
+  // Draw the cable swag by swag; a single path would join the end of one swag
+  // to the start of the next with a phantom line.
   function cable(list, upto) {
-    // Draw the cable swag by swag: breaking the path at each pole boundary
-    // avoids a phantom line joining the end of one swag to the start of the next.
     var start = 0;
     while (start < list.length) {
       var end = start;
-      while (end + 1 < list.length && list[end + 1].t > list[end].t) end++;
+      while (end + 1 < list.length && list[end + 1].swag === list[end].swag) end++;
       ctx.beginPath();
       var moved = false;
       for (var i = start; i <= end; i++) {
-        var b = list[i];
-        if (b.t > upto + 0.0001) break;
-        if (!moved) { ctx.moveTo(b.x, b.y); moved = true; }
-        else ctx.lineTo(b.x, b.y);
+        var p = list[i];
+        if (p.t > upto + 0.0001) break;
+        if (!moved) { ctx.moveTo(p.x, p.y); moved = true; }
+        else ctx.lineTo(p.x, p.y);
       }
       if (moved) ctx.stroke();
       start = end + 1;
     }
   }
 
-  function bulb(x, y, radius, colour, alpha, glow) {
-    alpha = Math.max(0, Math.min(1, alpha));
+  function drawBulb(x, y, radius, colour, alpha, glow, stemFrom) {
     if (alpha <= 0.02) return;
 
+    if (stemFrom !== null && alpha > 0.15) {
+      ctx.strokeStyle = STEM + (0.55 * alpha) + ')';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(x, stemFrom);
+      ctx.lineTo(x, y - radius * 0.9);
+      ctx.stroke();
+    }
+
     if (glow > 0.02) {
-      var g = ctx.createRadialGradient(x, y, 0, x, y, radius * 4.2);
-      g.addColorStop(0, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.80 * glow * alpha) + ')');
-      g.addColorStop(0.5, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.22 * glow * alpha) + ')');
+      var g = ctx.createRadialGradient(x, y, radius * 0.5, x, y, radius * 3.4);
+      g.addColorStop(0, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.55 * glow * alpha) + ')');
+      g.addColorStop(0.55, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.14 * glow * alpha) + ')');
       g.addColorStop(1, 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',0)');
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(x, y, radius * 4.2, 0, Math.PI * 2);
+      ctx.arc(x, y, radius * 3.4, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    ctx.fillStyle = 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + (0.92 * alpha) + ')';
+    // the bulb body: solid, so it reads as an object rather than a bloom
+    ctx.fillStyle = 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',' + alpha + ')';
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = 'rgba(' + HOT[0] + ',' + HOT[1] + ',' + HOT[2] + ',' + (0.95 * alpha * glow) + ')';
+    // filament
+    ctx.fillStyle = 'rgba(' + CORE[0] + ',' + CORE[1] + ',' + CORE[2] + ',' + (0.92 * alpha) + ')';
     ctx.beginPath();
-    ctx.arc(x, y, radius * 0.45, 0, Math.PI * 2);
+    ctx.arc(x - radius * 0.18, y - radius * 0.18, radius * 0.42, 0, Math.PI * 2);
     ctx.fill();
   }
 
   function drawBack(now) {
-    ctx.strokeStyle = 'rgba(11,11,12,0.13)';
+    ctx.strokeStyle = 'rgba(11,11,12,0.15)';
     ctx.lineWidth = 1;
     cable(back, 1);
     for (var i = 0; i < back.length; i++) {
       var b = back[i];
-      var sway = Math.sin(now / 4200 + b.phase) * 1.6;
-      bulb(b.x, b.y + sway, 1.9, WARM, 0.34, 0.30);
+      var sway = Math.sin(now / 4200 + b.phase) * 1.5;
+      drawBulb(b.x, b.y + sway + 7, 3.2, WARM, 0.34, 0.3, b.y + sway);
     }
   }
 
   function drawFront(now, dt) {
     var head = null;
-    for (var h = 0; h < front.length; h++) {
-      if (front[h].t <= progress) head = front[h];
-      else break;
-    }
+    var reach = staticMode ? 1 : progress;
 
     ctx.strokeStyle = 'rgba(11,11,12,0.62)';
-    ctx.lineWidth = 1.3;
-    cable(front, progress);
+    ctx.lineWidth = 1.4;
+    cable(front, reach);
 
     for (var k = 0; k < front.length; k++) {
       var b = front[k];
-      if (b.t > progress + 0.0001) continue;
-      if (b.ign < 0) b.ign = 0;
-      if (b.ign < 1) b.ign = Math.min(1, b.ign + dt / 380);
+      if (b.t > reach + 0.0001) continue;
+      if (b.ign < 1) b.ign = Math.min(1, b.ign + (staticMode ? 1 : dt / 260));
+      head = b;
 
-      var sway2 = Math.sin(now / 3000 + b.phase) * 2.1;
+      var sway2 = Math.sin(now / 3000 + b.phase) * 1.9;
       var cableY = b.y + sway2;
-      var by = cableY + 12;            // the bulb hangs below the cable, on a short stem
-      var x = b.x;
+      var by = cableY + 11;
 
-      var breathe = 0.80 + 0.20 * Math.sin(now / 1100 + b.phase);
-      var near = Math.hypot(pointer.x - x, pointer.y - by);
-      var pull = near < 210 ? (1 - near / 210) : 0;
+      var breathe = 0.86 + 0.14 * Math.sin(now / 1300 + b.phase);
+      var near = Math.hypot(pointer.x - b.x, pointer.y - by);
+      var pull = near < 190 ? (1 - near / 190) : 0;
 
-      var radius = 7.2 * (1 + pull * 0.25);
-      var alpha = breathe * b.ign + pull * 0.2;
-      var glow = (0.62 + 0.38 * breathe) * b.ign + pull * 1.0;
+      var radius = 6.4 * (1 + pull * 0.22);
+      var alpha = Math.min(1, breathe * b.ign + pull * 0.25);
+      var glow = (0.7 + 0.3 * breathe) * b.ign + pull;
 
-      // stem, so the bulb reads as hanging from the cable rather than floating
-      if (b.ign > 0.05) {
-        ctx.strokeStyle = 'rgba(11,11,12,' + (0.45 * b.ign) + ')';
-        ctx.lineWidth = 1.1;
-        ctx.beginPath();
-        ctx.moveTo(x, cableY);
-        ctx.lineTo(x, by - radius * 0.85);
-        ctx.stroke();
-      }
-
-      bulb(x, by, radius, b.colour, alpha, glow);
+      drawBulb(b.x, by, radius, b.colour, alpha, glow, cableY);
     }
 
-    // The install head: where the cable is currently being pulled.
-    if (head && progress > 0.001 && progress < 0.999) {
-      var s = Math.sin(now / 3000 + head.phase) * 2.1;
-      var spark = ctx.createRadialGradient(head.x, head.y + s, 0, head.x, head.y + s, 34);
+    // the install head: where the cable is being pulled
+    if (head && !staticMode && progress > 0.001 && progress < 0.999) {
+      var s = Math.sin(now / 3000 + head.phase) * 1.9;
+      var spark = ctx.createRadialGradient(head.x, head.y + s, 0, head.x, head.y + s, 26);
       spark.addColorStop(0, 'rgba(255,255,255,0.98)');
-      spark.addColorStop(0.3, 'rgba(255,196,110,0.62)');
-      spark.addColorStop(1, 'rgba(255,196,110,0)');
+      spark.addColorStop(0.3, 'rgba(255,190,100,0.6)');
+      spark.addColorStop(1, 'rgba(255,190,100,0)');
       ctx.fillStyle = spark;
       ctx.beginPath();
-      ctx.arc(head.x, head.y + s, 34, 0, Math.PI * 2);
+      ctx.arc(head.x, head.y + s, 26, 0, Math.PI * 2);
       ctx.fill();
     }
   }
 
-  function finishedFrame() {
-    // A complete, strung, lit run — used for reduced motion and whenever the
-    // animation loop cannot start (a backgrounded tab throttles rAF flat).
+  function render(now, dt) {
     ctx.clearRect(0, 0, W, H);
-    drawBack(0);
-    var keep = progress;
-    progress = 1;
+    drawBack(now);
+    drawFront(now, dt || 16);
+  }
+
+  function goStatic() {
+    staticMode = true;
     for (var i = 0; i < front.length; i++) front[i].ign = 1;
-    drawFront(0, 999);
-    progress = keep;
-    for (var j = 0; j < front.length; j++) front[j].ign = -1;
+    progress = 1;
+    render(0, 16);
   }
 
   function frame(now) {
@@ -223,43 +218,43 @@
     var dt = last ? Math.min(64, now - last) : 16;
     last = now;
 
-    if (!reduce && progress < 1) progress = Math.min(1, (now - startedAt) / INSTALL_MS);
+    if (!staticMode) {
+      progress = Math.min(1, (now - startedAt) / INSTALL_MS);
+      if (progress >= 1) for (var i = 0; i < front.length; i++) front[i].ign = 1;
+    }
 
-    ctx.clearRect(0, 0, W, H);
-    drawBack(now);
-    drawFront(now, dt);
-    raf = requestAnimationFrame(frame);
+    render(now, dt);
+    requestAnimationFrame(frame);
   }
 
-  function onPointer(e) {
+  window.addEventListener('pointermove', function (e) {
     var r = canvas.getBoundingClientRect();
     pointer.x = e.clientX - r.left;
     pointer.y = e.clientY - r.top;
-  }
-
-  window.addEventListener('pointermove', onPointer, { passive: true });
+  }, { passive: true });
   window.addEventListener('pointerleave', function () { pointer.x = -9999; pointer.y = -9999; });
 
   var rt;
   window.addEventListener('resize', function () {
     clearTimeout(rt);
-    rt = setTimeout(function () {
-      size();
-      if (reduce || !startedAt) finishedFrame();
-    }, 160);
+    rt = setTimeout(function () { size(); render(performance.now(), 16); }, 160);
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    // Coming back to a tab whose loop was throttled: show the finished run.
+    if (!document.hidden && staticMode) render(performance.now(), 16);
   });
 
   size();
 
   if (reduce) {
-    finishedFrame();
+    goStatic();
   } else {
-    raf = requestAnimationFrame(frame);
+    requestAnimationFrame(frame);
+    // If the loop never really runs (hidden tab), settle on the finished run.
     watchdog = setTimeout(function () {
-      // A single frame may run and then stall (throttled tab). If the install has
-      // not actually progressed, paint the finished run instead of leaving white.
-      if (progress < 0.05) finishedFrame();
-    }, 900);
+      if (progress < 0.05) goStatic();
+    }, 800);
   }
 
   window.__lightsReady = true;

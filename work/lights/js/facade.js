@@ -58,8 +58,8 @@
     var rand = rng(42180735);
     var i, j, c;
 
-    var roofMin = H * 0.12;
-    var roofMax = H * 0.27;
+    var roofMin = H * 0.10;
+    var roofMax = H * 0.30;
 
     // Rooftops behind the street, above the main roofline: only silhouettes.
     backdrop = [];
@@ -129,7 +129,9 @@
             w: ww,
             h: wh,
             at: clamp((cx + W * 0.06) / span, 0.02, 0.98),
-            tone: 0.55 + rand() * 0.45
+            tone: 0.55 + rand() * 0.45,
+            // a few rooms stay dark when the run passes: nobody left a light on
+            dark: rand() < 0.22
           });
         }
       }
@@ -279,6 +281,7 @@
     for (var i = 0; i < windows.length; i++) {
       var win = windows[i];
       var lit = clamp((progress - win.at) / 0.12, 0, 1);
+      if (win.dark) { lit *= 0.10; }
 
       ctx.fillStyle = 'rgba(6,6,10,0.95)';
       ctx.fillRect(win.x, win.y, win.w, win.h);

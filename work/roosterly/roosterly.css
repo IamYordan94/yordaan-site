@@ -362,11 +362,12 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
   background:var(--ink);
   padding:.32rem .6rem;
 }
+.status-aside{display:flex;flex-direction:column;gap:1.1rem;align-items:flex-start}
 .status-note{
-  margin:.9rem 0 0;
-  font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  margin:0;
+  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);
-  line-height:1.9;
+  line-height:2;
 }
 .status-body p{margin:0 0 1rem;max-width:64ch}
 .status-body p:last-child{margin-bottom:0}
