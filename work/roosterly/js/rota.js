@@ -88,7 +88,7 @@
       }
     }
 
-    gapFlag = make('div', 'gap-flag', 'gap');
+    gapFlag = make('div', 'gap-flag', 'open');
     cells[GAP.crew][GAP.day].appendChild(gapFlag);
 
     var countEl = document.getElementById('rota-count');

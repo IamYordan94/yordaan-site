@@ -135,6 +135,10 @@
     }
     ctx.stroke();
 
+    /* a defined outer edge, so empty cells still read as one board */
+    ctx.strokeStyle = '#0b0b0c';
+    ctx.strokeRect(0.5, 0.5, size - 1, size - 1);
+
     if (countEl && shown !== lastCount) {
       lastCount = shown;
       countEl.textContent = (shown < 10 ? '0' : '') + shown;

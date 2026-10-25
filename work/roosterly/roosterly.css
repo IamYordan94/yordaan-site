@@ -234,9 +234,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   display:flex;align-items:center;justify-content:center;
   border:1px dashed var(--accent);
   color:var(--accent);
-  font-size:.44rem;
-  letter-spacing:.09em;
-  text-transform:uppercase;
+  font-size:.5rem;
+  letter-spacing:.03em;
   opacity:0;
   transition:opacity .35s ease;
 }
@@ -349,12 +348,10 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 .status-block{
   border:1px solid var(--ink);
   padding:clamp(1.25rem,3vw,2rem);
-  display:grid;
-  gap:1.1rem 2.5rem;
-  align-items:start;
+  max-width:42rem;
 }
 .status-flag{
-  margin:0;
+  margin:0 0 .9rem;
   justify-self:start;
   display:inline-block;
   font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
@@ -362,12 +359,12 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
   background:var(--ink);
   padding:.32rem .6rem;
 }
-.status-aside{display:flex;flex-direction:column;gap:1.1rem;align-items:flex-start}
-.status-note{
-  margin:0;
-  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+.status-lead{
+  margin:0 0 1.1rem;
+  font-family:var(--display);
+  font-size:1.05rem;
+  letter-spacing:-.01em;
   color:var(--muted);
-  line-height:2;
 }
 .status-body p{margin:0 0 1rem;max-width:64ch}
 .status-body p:last-child{margin-bottom:0}
@@ -416,6 +413,11 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 }
 .footer-legal a{color:var(--ink);text-decoration:underline;text-underline-offset:.15em}
 
+/* ---------- tablet: one column, but the rota needs taller cells ---------- */
+@media (min-width:601px) and (max-width:879px){
+  :root{--headh:1.7rem;--cellh:2.5rem}
+}
+
 /* ---------- wider ---------- */
 @media (min-width:880px){
   :root{--crewcol:4.6rem;--headh:1.9rem;--cellh:3rem}
@@ -433,9 +435,8 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
   .rota .r-corner{font-size:.56rem;padding-left:.6rem}
   .rota .r-cell{padding:3px}
   .shift{inset:3px;font-size:.64rem}
-  .gap-flag{inset:3px;font-size:.52rem}
-  .status-block{grid-template-columns:11rem minmax(0,1fr);align-items:stretch}
-  .status-aside{justify-content:space-between;height:100%}
+  .gap-flag{inset:3px;font-size:.58rem}
+
   .row{
     grid-template-columns:3.5rem minmax(12ch,19ch) minmax(0,1fr) 6rem;
     padding-block:1.6rem;
@@ -457,6 +458,9 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
   }
   .top nav a{padding-block:.2rem}
   .rota-head{gap:.4rem}
+  .foot-week{display:none}
+  .rota-foot{font-size:.54rem;letter-spacing:.1em;justify-content:flex-start;gap:.3rem .9rem}
+  .row .tag{font-size:.58rem;padding:.2rem .4rem}
   .rota-figure figcaption{max-width:none}
 }
 

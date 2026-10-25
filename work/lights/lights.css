@@ -101,7 +101,7 @@ a:focus-visible,button:focus-visible{
 
 .scene{
   position:relative;
-  height:clamp(240px,46vh,470px);
+  height:clamp(220px,34vh,390px);
   margin-bottom:clamp(1.6rem,4vw,2.75rem);
 }
 #facade{
@@ -132,12 +132,12 @@ a:focus-visible,button:focus-visible{
   letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--muted);
+  text-wrap:balance;
 }
 
 .hero-copy{
   display:grid;
   grid-template-columns:minmax(0,1fr);
-  gap:clamp(1.25rem,3vw,2rem);
 }
 .kicker{
   margin:0 0 clamp(1rem,2.5vw,1.5rem);
@@ -147,10 +147,10 @@ a:focus-visible,button:focus-visible{
 .hero h1{
   font-family:var(--display);
   font-weight:400;
-  font-size:clamp(2.15rem,1.35rem + 3.4vw,4.15rem);
-  line-height:1.02;
+  font-size:clamp(2.05rem,1.2rem + 2.7vw,3.55rem);
+  line-height:1.03;
   letter-spacing:-.025em;
-  margin:0;
+  margin:0 0 clamp(1.25rem,2.5vw,1.85rem);
   max-width:19ch;
   text-wrap:balance;
 }
@@ -159,13 +159,17 @@ a:focus-visible,button:focus-visible{
   color:var(--warm);
 }
 
-.hero-text p{margin:0 0 1rem;max-width:48ch;color:var(--muted)}
-.hero-text p:last-child{margin-bottom:0}
+.hero-text{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:.9rem;
+}
+.hero-text p{margin:0;max-width:52ch;color:var(--muted)}
 .hero-text .lede{
   color:var(--ink);
   font-size:clamp(1.05rem,.98rem + .45vw,1.3rem);
   line-height:1.5;
-  max-width:44ch;
+  max-width:45ch;
 }
 
 /* ---------- sections ---------- */
@@ -394,10 +398,11 @@ section{padding-block:clamp(2.5rem,5vw,4.25rem)}
   .places{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:2.5rem}
 }
 @media (min-width:820px){
-  .hero-copy{
-    grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  .hero h1{max-width:30ch}
+  .hero-text{
+    grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
     gap:clamp(2rem,5vw,4.5rem);
-    align-items:end;
+    align-items:start;
   }
   .step{
     display:grid;
@@ -418,7 +423,7 @@ section{padding-block:clamp(2.5rem,5vw,4.25rem)}
   .top{gap:0}
   .top-inner{gap:.85rem}
   .top nav{margin-left:0;gap:1.2rem;width:100%}
-  .top nav a{font-size:.73rem;padding-block:.55rem}
+  .top nav a{font-size:.73rem;padding-block:.75rem}
   .scene{height:clamp(215px,40vh,330px)}
   .scene-cap{font-size:.6rem;letter-spacing:.1em}
   .step-num{font-size:.75rem}

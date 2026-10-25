@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://yordaan.com/work/roosterly/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Crect x='2' y='2' width='28' height='28' fill='%231F3AE0'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="roosterly.css">
-  <link rel="stylesheet" href="../../strand.css">
+<link rel="stylesheet" href="../../strand.css">
 </head>
 <body>
 
@@ -49,21 +49,21 @@
             <p class="rota-label">Week 42 &middot; four crews</p>
             <ul class="legend">
               <li><span class="sw" aria-hidden="true"></span>shift</li>
-              <li><span class="sw sw-gap" aria-hidden="true"></span>uncovered</li>
+              <li><span class="sw sw-gap" aria-hidden="true"></span>open</li>
             </ul>
           </div>
-          <div class="rota" id="rota" role="img" aria-label="Diagram of a weekly rota: four crews by seven days, with shift blocks filling in one at a time and one uncovered shift on Sunday.">
+          <div class="rota" id="rota" role="img" aria-label="Diagram of a weekly rota: four crews by seven days, with shift blocks filling in one at a time and one shift left open on Sunday.">
             <p class="rota-noscript">The week view needs JavaScript to fill in. The page reads the same without it.</p>
           </div>
           <p class="rota-foot" aria-hidden="true">
-            <span>Week 42 &middot; 12&ndash;18 Oct</span>
+            <span class="foot-week">Week 42 &middot; 12&ndash;18 Oct</span>
             <span><b id="rota-count">&mdash;</b> shifts planned</span>
-            <span><b id="rota-gap">&mdash;</b> uncovered</span>
+            <span><b id="rota-gap">&mdash;</b> open</span>
           </p>
         </div>
         <figcaption id="rota-cap">
           <span class="cap-strong">An illustration of the week view, not a real schedule.</span>
-          The blocks fill in one at a time, the uncovered shift shows up, and then it starts again.
+          The blocks fill in one at a time, Sunday is left open, and then it starts again.
         </figcaption>
       </figure>
 
@@ -80,28 +80,28 @@
 
       <div class="index">
         <article class="row">
-          <span class="row-num">01</span>
+          <span class="row-num">1</span>
           <h3>Plan a week of shifts</h3>
           <p>Put a crew on a day as a block of hours, and see the whole week at once instead of in six tabs. The week is the unit: Monday to Sunday, everyone in view, nothing hidden behind a click.</p>
           <span class="tag">intended</span>
         </article>
 
         <article class="row">
-          <span class="row-num">02</span>
+          <span class="row-num">2</span>
           <h3>Spot the gaps and the overlaps</h3>
           <p>The two mistakes that cost an evening: an hour with nobody on it, and one person booked in two places. Both are cheap to find on Thursday and expensive to find on Monday morning, so the tool should point at them while the week is still being planned.</p>
           <span class="tag">intended</span>
         </article>
 
         <article class="row">
-          <span class="row-num">03</span>
+          <span class="row-num">3</span>
           <h3>Keep the hours honest</h3>
           <p>Planned hours sit next to the hours that came back, so the difference between the rota and the timesheet is visible while it can still be fixed &mdash; not at the end of the month, when the only person who remembers that Tuesday is gone.</p>
           <span class="tag">intended</span>
         </article>
 
         <article class="row">
-          <span class="row-num">04</span>
+          <span class="row-num">4</span>
           <h3>Change one shift, not the sheet</h3>
           <p>When someone calls, the change happens once, in the place the rota already lives, and everyone who needs to know reads the same version. No second copy, no forwarded photo, no &ldquo;the one I sent on Friday&rdquo;.</p>
           <span class="tag">intended</span>
@@ -119,10 +119,8 @@
       </div>
 
       <div class="status-block">
-        <div class="status-aside">
-          <p class="status-flag">In development</p>
-          <p class="status-note">No sign-ups<br>No price<br>No date</p>
-        </div>
+        <p class="status-flag">In development</p>
+        <p class="status-lead">No sign-ups. No price. No date.</p>
         <div class="status-body">
           <p>Rosterly is being built by <strong>Yordan Creatives</strong>, the studio that also runs winter-lighting installation crews. It is <strong>not open to sign-ups</strong>: there is no account to create, nothing to pay for and no waiting list. It has no public version and no site of its own yet &mdash; this page is the only description of it.</p>
           <p>If you run shifts and want to talk about how you build your rota, or ask where this is going, email <a class="mail" href="mailto:Yordancreatives@gmail.com">Yordancreatives@gmail.com</a>. One person reads that inbox, and it is the same person writing the tool.</p>

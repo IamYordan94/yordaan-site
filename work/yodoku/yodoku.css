@@ -25,7 +25,6 @@ body{
   font-size:clamp(1rem,.95rem + .2vw,1.075rem);
   line-height:1.6;
   text-rendering:optimizeLegibility;
-  overflow-x:hidden;
 }
 img,canvas{max-width:100%}
 a{color:inherit}
@@ -150,7 +149,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   margin-top:.1rem;
   padding-top:.6rem;
   border-top:1px solid var(--ink);
-  font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);
   font-variant-numeric:tabular-nums;
 }
