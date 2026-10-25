@@ -376,10 +376,13 @@
       }
       ctx.stroke();
 
-      // fixing points where each span is tied back
-      ctx.fillStyle = 'rgba(8,8,11,' + (0.7 * cableA).toFixed(3) + ')';
+      // fixing points where each span is tied back to the facade
       for (px = -18; px <= W + 30; px += spanW) {
-        ctx.fillRect(px - 1.5, cableY(px) - 1, 3, 4);
+        py = cableY(px);
+        ctx.fillStyle = 'rgba(8,8,11,' + (0.75 * cableA).toFixed(3) + ')';
+        ctx.fillRect(px - 2, py - 3, 4, 7);
+        ctx.fillStyle = 'rgba(255,214,150,' + (0.45 * cableA).toFixed(3) + ')';
+        ctx.fillRect(px - 2, py - 3, 4, 1.5);
       }
     }
 

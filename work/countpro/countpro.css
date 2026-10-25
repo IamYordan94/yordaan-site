@@ -225,12 +225,11 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   padding-block:clamp(1.25rem,2.5vw,1.75rem);
   border-bottom:1px solid var(--rule);
 }
-.rows .n{
+.rows .tick{
   grid-row:1 / span 2;
-  padding-top:.35rem;
-  font-size:.72rem;letter-spacing:.1em;
-  color:var(--accent);
-  font-variant-numeric:tabular-nums;
+  width:12px;height:1px;
+  margin-top:.82rem;
+  background:var(--accent);
 }
 .rows h3{
   grid-column:2;
@@ -244,13 +243,6 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   max-width:64ch;
   color:var(--muted);
 }
-/* ---------- prose ---------- */
-.prose p{margin:0;max-width:62ch}
-@media (min-width:760px){
-  /* Body copy under a section heading lines up with the heading, not the rail. */
-  .prose{padding-left:calc(2.2rem + 1.25rem)}
-}
-
 /* ---------- the link ---------- */
 .cta{
   border-bottom:1px solid var(--rule);

@@ -336,10 +336,10 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 .row .tag{
   grid-row:1;grid-column:3;
   justify-self:end;
-  font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;
+  font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;
   color:var(--muted);
   border:1px solid var(--rule);
-  padding:.22rem .45rem;
+  padding:.24rem .5rem;
   white-space:nowrap;
   margin-top:.15rem;
 }
@@ -410,7 +410,7 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 .footer-legal{
   margin:0 0 .7rem;
   font-size:.78rem;
-  line-height:1.65;
+  line-height:1.72;
   color:var(--muted);
   max-width:86ch;
 }
@@ -434,7 +434,8 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
   .rota .r-cell{padding:3px}
   .shift{inset:3px;font-size:.64rem}
   .gap-flag{inset:3px;font-size:.52rem}
-  .status-block{grid-template-columns:11rem minmax(0,1fr)}
+  .status-block{grid-template-columns:11rem minmax(0,1fr);align-items:stretch}
+  .status-aside{justify-content:space-between;height:100%}
   .row{
     grid-template-columns:3.5rem minmax(12ch,19ch) minmax(0,1fr) 6rem;
     padding-block:1.6rem;

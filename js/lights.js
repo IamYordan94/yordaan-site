@@ -120,6 +120,23 @@
       ctx.moveTo(x, stemFrom);
       ctx.lineTo(x, y - radius * 0.9);
       ctx.stroke();
+
+      // the socket: a small dark collar where the bulb meets the drop wire
+      ctx.fillStyle = STEM + (0.75 * alpha) + ')';
+      ctx.beginPath();
+      ctx.ellipse(x, y - radius * 0.92, radius * 0.38, radius * 0.22, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // a soft ground shadow under the fitting, so the bulb has weight
+    if (alpha > 0.2) {
+      var sh = ctx.createRadialGradient(x, y + radius * 1.9, 0, x, y + radius * 1.9, radius * 1.7);
+      sh.addColorStop(0, 'rgba(11,11,12,' + (0.10 * alpha) + ')');
+      sh.addColorStop(1, 'rgba(11,11,12,0)');
+      ctx.fillStyle = sh;
+      ctx.beginPath();
+      ctx.ellipse(x, y + radius * 1.9, radius * 1.7, radius * 0.5, 0, 0, Math.PI * 2);
+      ctx.fill();
     }
 
     if (glow > 0.02) {
