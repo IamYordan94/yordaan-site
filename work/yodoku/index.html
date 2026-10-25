@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yodoku &mdash; seven small games, one board | Yordan Creatives</title>
+<meta name="description" content="Yodoku is a daily puzzle site: seven short logic games on one shared board, one puzzle a day, no account needed. Built and operated by Yordan Creatives, Amstelveen.">
+<link rel="canonical" href="https://yordaan.com/work/yodoku/">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Yordan Creatives">
+<meta property="og:title" content="Yodoku — seven small games, one board">
+<meta property="og:description" content="Seven short logic games on one shared board. One puzzle a day, no account needed. A product of Yordan Creatives.">
+<meta property="og:url" content="https://yordaan.com/work/yodoku/">
+<meta property="og:locale" content="en_NL">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Crect x='2' y='2' width='28' height='28' fill='%231F3AE0'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="yodoku.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Yodoku",
+  "url": "https://www.yodoku.app/",
+  "description": "Seven short daily logic games on one shared board.",
+  "isAccessibleForFree": true,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Yordan Creatives",
+    "url": "https://yordaan.com/",
+    "email": "Yordancreatives@gmail.com"
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="wordmark" href="../../">Yordan<span>Creatives</span></a>
+    <nav aria-label="Work">
+      <a href="../lights/">Lights</a>
+      <a href="../countpro/">CountPro</a>
+      <a href="../roosterly/">Roosterly</a>
+      <a href="../../#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+
+      <div class="hero-copy">
+        <p class="kicker">Yordan Creatives &middot; a product, live</p>
+        <h1 id="hero-title">Seven small games.<br><em>One shared board.</em></h1>
+        <p class="hero-lede">Yodoku is a daily puzzle site: seven short logic games that share one board, one date and one count of what you have played.</p>
+
+        <div class="hero-body">
+          <p>The design idea is that a daily puzzle should behave like a system rather than a toy. One board holds the date, the seven games and a single count of how many are finished; each game is a single sitting rather than a campaign. Between them they cover words, order, quantity and recall &mdash; seven shapes on the same grid, none of them larger than a minute.</p>
+          <p>There is no account to make and no streak to protect. Tomorrow there is simply a different board.</p>
+        </div>
+
+        <p class="hero-cta">
+          <a class="go" href="https://www.yodoku.app" target="_blank" rel="noopener">Play today&rsquo;s board <span aria-hidden="true">&#8599;</span></a>
+          <span class="hero-cta-note">opens yodoku.app in a new tab</span>
+        </p>
+      </div>
+
+      <figure class="board">
+        <canvas id="board-canvas" role="img" aria-label="A seven by seven grid filling in cells one at a time, holding, then clearing and starting again."></canvas>
+        <figcaption class="board-cap">
+          <span class="board-tag">Board 7 &times; 7</span>
+          <span class="board-state" id="board-state">filling</span>
+          <span class="board-count"><b id="board-count">00</b>&thinsp;/&thinsp;49</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <section id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="marker">01</span>
+        <h2 id="how-title">How it plays</h2>
+        <p>A day on Yodoku, in the order it happens.</p>
+      </div>
+
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <div>
+            <h3>Open yodoku.app</h3>
+            <p>No account, no signup and no app store detour. The board is the first thing on the screen, already set to today&rsquo;s date.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <div>
+            <h3>Pick from seven</h3>
+            <p>Clear the String, Change by One, Word Pool, ORDERLE, FERMI, Quiz Master and 7 Letters sit on the same board. Play them in any order.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <div>
+            <h3>Spend a minute</h3>
+            <p>Each game is one puzzle, solved or left alone in about a minute. Nothing to grind, and no timer running against you.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <div>
+            <h3>Watch the count</h3>
+            <p>Every finished game is counted: 3&thinsp;/&thinsp;7 played, then 7&thinsp;/&thinsp;7. Stopping at three costs nothing and loses nothing.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">05</span>
+          <div>
+            <h3>Come back tomorrow</h3>
+            <p>The seven games stay, the puzzles change. Yesterday&rsquo;s board does not follow you around.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="games" aria-labelledby="games-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="marker">02</span>
+        <h2 id="games-title">Seven games, one grid</h2>
+        <p>In the product these are seven different screens. What they share is the board, the date and the count. Here each one is drawn as a different fill pattern on the same seven-by-seven grid.</p>
+      </div>
+
+      <ol class="modes">
+        <li class="mode">
+          <span class="mode-num">01</span>
+          <h3>Clear the String <span class="mode-tag">word</span></h3>
+          <p>Find the solution words tucked inside a scrambled string, and clear every single letter.</p>
+          <span class="mode-board" data-pattern="string" aria-hidden="true"></span>
+        </li>
+        <li class="mode">
+          <span class="mode-num">02</span>
+          <h3>Change by One <span class="mode-tag">ladder</span></h3>
+          <p>Turn one word into another, one letter at a time. Every step has to be a real word.</p>
+          <span class="mode-board" data-pattern="ladder" aria-hidden="true"></span>
+        </li>
+        <li class="mode">
+          <span class="mode-num">03</span>
+          <h3>Word Pool <span class="mode-tag">category</span></h3>
+          <p>Name every word in a category, with the constraint narrowing level by level until only a handful qualify.</p>
+          <span class="mode-board" data-pattern="pool" aria-hidden="true"></span>
+        </li>
+        <li class="mode">
+          <span class="mode-num">04</span>
+          <h3>ORDERLE <span class="mode-tag">sequence</span></h3>
+          <p>Put a handful of items in the correct order, one swap at a time, then read why that order is what it is.</p>
+          <span class="mode-board" data-pattern="order" aria-hidden="true"></span>
+        </li>
+        <li class="mode">
+          <span class="mode-num">05</span>
+          <h3>FERMI <span class="mode-tag">estimate</span></h3>
+          <p>Guess a real-world number and calibrate your sense of scale &mdash; one question a day.</p>
+          <span class="mode-board" data-pattern="fermi" aria-hidden="true"></span>
+        </li>
+        <li class="mode">
+          <span class="mode-num">06</span>
+          <h3>Quiz Master <span class="mode-tag">trivia</span></h3>
+          <p>Ten questions a day across eleven categories, scored once, without a leaderboard to climb.</p>
+          <span class="mode-board" data-pattern="quiz" aria-hidden="true"></span>
+        </li>
+        <li class="mode">
+          <span class="mode-num">07</span>
+          <h3>7 Letters <span class="mode-tag">letters</span></h3>
+          <p>Seven letters, one centre. Build words with the centre in them and chase the pangram.</p>
+          <span class="mode-board" data-pattern="seven" aria-hidden="true"></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="why" aria-labelledby="why-title">
+    <div class="wrap narrow">
+      <div class="section-head">
+        <span class="marker">03</span>
+        <h2 id="why-title">Why it exists</h2>
+      </div>
+      <div class="prose">
+        <p>Yodoku is built and operated by Yordan Creatives, the one-person company that also installs winter lighting on shopping streets and public squares in Amsterdam, Rotterdam and Amstelveen. One person, two kinds of work: a night on a ladder against a fixed opening time, and a desk where a puzzle has to be solvable in a minute by someone who has never seen it.</p>
+        <p>The pairing is the point of the company rather than an aside. A street has to be lit and working before it opens, whether or not anyone is standing next to it; a daily puzzle is a smaller system with the same requirement. Yodoku is a product rather than a portfolio piece &mdash; the company runs it, and it is monetised through advertising on the site.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="play" aria-labelledby="play-title">
+    <div class="wrap">
+      <span class="marker">04</span>
+      <h2 id="play-title">Today&rsquo;s board is at yodoku.app</h2>
+      <p>Seven games, one board, no account. Free to play, and it opens in a new tab so this page stays where it is.</p>
+      <a class="play-link" href="https://www.yodoku.app" target="_blank" rel="noopener">
+        <span>www.yodoku.app</span><span class="play-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+
+      <dl class="play-facts">
+        <div><dt>Games</dt><dd>7</dd></div>
+        <div><dt>Account</dt><dd>None</dd></div>
+        <div><dt>New puzzles</dt><dd>Daily</dd></div>
+        <div><dt>Cost</dt><dd>Free</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <p class="footer-name">Yordan Creatives</p>
+      <nav aria-label="Legal and contact">
+        <a href="../../privacy.html">Privacy policy</a>
+        <a href="../../terms.html">Terms of service</a>
+        <a href="mailto:Yordancreatives@gmail.com">Email</a>
+        <a href="../../">Main site</a>
+      </nav>
+    </div>
+    <p class="footer-legal">Yordan Creatives &mdash; eenmanszaak Yordan Mihaylov, Zonnestein 142, 1181 MA Amstelveen, the Netherlands. KvK 42180735 &middot; BTW NL005560897B23 &middot; <a href="mailto:Yordancreatives@gmail.com">Yordancreatives@gmail.com</a></p>
+    <p class="footer-legal">Yodoku is a product of Yordan Creatives, live at <a href="https://www.yodoku.app" target="_blank" rel="noopener">www.yodoku.app</a>. This page loads no external scripts, fonts or trackers, and sets no cookies.</p>
+  </div>
+</footer>
+
+<script src="js/grid.js" defer></script>
+
+</body>
+</html>

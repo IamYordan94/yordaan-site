@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rosterly — a scheduling tool in development — Yordan Creatives</title>
+<meta name="description" content="Rosterly is a scheduling tool for shift-based businesses, in development by Yordan Creatives in Amstelveen: plan a week of shifts, spot the gaps and overlaps, and keep planned hours consistent with the hours actually worked.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://yordaan.com/work/roosterly/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Crect x='2' y='2' width='28' height='28' fill='%231F3AE0'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="roosterly.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="wordmark" href="../../" aria-current="page">Roosterly<span>in development</span></a>
+    <nav aria-label="Elsewhere on this site">
+      <a href="../lights/">Winter lighting</a>
+      <a href="../yodoku/">Yodoku</a>
+      <a href="../countpro/">CountPro</a>
+      <a href="../../#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="title">
+    <div class="wrap hero-grid">
+
+      <div class="hero-copy">
+        <p class="kicker">A scheduling tool &middot; not yet released</p>
+        <h1 id="title">The rota,<br><em>written once.</em></h1>
+
+        <p class="def">Rosterly is a scheduling tool for shift-based businesses: the week&rsquo;s shifts, who works them, and the hours each one adds up to.</p>
+
+        <p class="problem">Most rotas are still built by hand &mdash; a spreadsheet, a whiteboard, a photo of a spreadsheet on someone&rsquo;s phone. Then the week starts. One person swaps a shift by text message, another calls in sick at four in the afternoon, two names end up in the same place at the same hour, and the hours written down in advance stop matching the hours that were actually worked. On Sunday the whole thing is rebuilt from memory, and a month later somebody reconciles the timesheet line by line.</p>
+
+        <p class="hero-note">Planning a week of shifts is not a hard problem. Keeping one version of that week, that everyone can see and that still matches the hours, is.</p>
+      </div>
+
+      <figure class="rota-figure" aria-labelledby="rota-cap">
+        <div class="rota-panel">
+          <div class="rota-head">
+            <p class="rota-label">Week 42 &middot; four crews</p>
+            <ul class="legend">
+              <li><span class="sw" aria-hidden="true"></span>shift</li>
+              <li><span class="sw sw-gap" aria-hidden="true"></span>uncovered</li>
+            </ul>
+          </div>
+          <div class="rota" id="rota" role="img" aria-label="Diagram of a weekly rota: four crews by seven days, with shift blocks filling in one at a time and one uncovered shift on Sunday.">
+            <p class="rota-noscript">The week view needs JavaScript to fill in. The page reads the same without it.</p>
+          </div>
+        </div>
+        <figcaption id="rota-cap">
+          <span class="cap-strong">An illustration of the week view, not a real schedule.</span>
+          The blocks fill in one at a time, the uncovered shift shows up, and then it starts again.
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <section id="what" aria-labelledby="what-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="marker">01</span>
+        <h2 id="what-title">What it will do</h2>
+        <p>Four things, being built in that order. None of them is finished, and this is what the tool is aiming at rather than a feature list off a brochure.</p>
+      </div>
+
+      <div class="index">
+        <article class="row">
+          <span class="row-num">01</span>
+          <h3>Plan a week of shifts</h3>
+          <p>Put a crew on a day as a block of hours, and see the whole week at once instead of in six tabs. The week is the unit: Monday to Sunday, everyone in view, nothing hidden behind a click.</p>
+          <span class="tag">intended</span>
+        </article>
+
+        <article class="row">
+          <span class="row-num">02</span>
+          <h3>Spot the gaps and the overlaps</h3>
+          <p>The two mistakes that cost an evening: an hour with nobody on it, and one person booked in two places. Both are cheap to find on Thursday and expensive to find on Monday morning, so the tool should point at them while the week is still being planned.</p>
+          <span class="tag">intended</span>
+        </article>
+
+        <article class="row">
+          <span class="row-num">03</span>
+          <h3>Keep the hours honest</h3>
+          <p>Planned hours sit next to the hours that came back, so the difference between the rota and the timesheet is visible while it can still be fixed &mdash; not at the end of the month, when the only person who remembers that Tuesday is gone.</p>
+          <span class="tag">intended</span>
+        </article>
+
+        <article class="row">
+          <span class="row-num">04</span>
+          <h3>Change one shift, not the sheet</h3>
+          <p>When someone calls, the change happens once, in the place the rota already lives, and everyone who needs to know reads the same version. No second copy, no forwarded photo, no &ldquo;the one I sent on Friday&rdquo;.</p>
+          <span class="tag">intended</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" aria-labelledby="status-title">
+    <div class="wrap narrow">
+      <div class="section-head">
+        <span class="marker">02</span>
+        <h2 id="status-title">Status</h2>
+      </div>
+
+      <div class="status-block">
+        <p class="status-flag">In development</p>
+        <p>Rosterly is being built by <strong>Yordan Creatives</strong>, the studio that also runs winter-lighting installation crews. It is <strong>not open to sign-ups</strong>: there is no account to create, no price list, no launch date and no waiting list. It has no public version and no site of its own yet &mdash; this page is the only description of it.</p>
+        <p>If you run shifts and want to talk about how you build your rota, or ask where this is going, email <a class="mail" href="mailto:Yordancreatives@gmail.com">Yordancreatives@gmail.com</a>. One person reads that inbox, and it is the same person writing the tool.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" aria-labelledby="why-title">
+    <div class="wrap narrow">
+      <div class="section-head">
+        <span class="marker">03</span>
+        <h2 id="why-title">Where it comes from</h2>
+      </div>
+
+      <div class="prose">
+        <p>The problem is not hypothetical here. The same company installs winter lighting: crews of two to six, night windows fixed by the client and by the street, a van loaded at nine in the evening for a shift that starts at eleven, and a phone call at four in the afternoon because one man cannot come. The week gets planned on paper, changed by phone, and reconciled from memory.</p>
+        <p>Rosterly is being shaped around that week &mdash; first so those crews are planned and paid from one record, then for anyone else who plans a week the same way and is currently doing it in a spreadsheet.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <p class="footer-name">Yordan Creatives</p>
+      <nav aria-label="Legal">
+        <a href="../../privacy.html">Privacy policy</a>
+        <a href="../../terms.html">Terms of service</a>
+        <a href="../../">yordaan.com</a>
+        <a href="mailto:Yordancreatives@gmail.com">Email</a>
+      </nav>
+    </div>
+    <p class="footer-legal">Rosterly is in development and not available to buy or sign up for. No customer, price or launch date is claimed on this page.</p>
+    <p class="footer-legal">&copy; 2026 Yordan Creatives &mdash; eenmanszaak Yordan Mihaylov, Zonnestein 142, 1181 MA Amstelveen, the Netherlands. KvK 42180735 &middot; BTW NL005560897B23 &middot; <a href="mailto:Yordancreatives@gmail.com">Yordancreatives@gmail.com</a>. This site sets no cookies, loads no external scripts or fonts, and contains no analytics or trackers.</p>
+  </div>
+</footer>
+
+<script src="js/rota.js" defer></script>
+
+</body>
+</html>

@@ -183,7 +183,23 @@
   }
 
   var last = 0;
+  var watchdog = 0;
+
+  function finishedFrame() {
+    // Draw the strung, lit run once, synchronously. Used for reduced motion and
+    // as a fallback: a backgrounded tab throttles requestAnimationFrame to a
+    // standstill, and the hero must never be an empty white box because of it.
+    ctx.clearRect(0, 0, W, H);
+    drawBack(0);
+    var keep = progress;
+    progress = 1;
+    for (var i = 0; i < front.length; i++) front[i].ign = 1;
+    drawFront(0, 999);
+    progress = keep;
+  }
+
   function frame(now) {
+    if (watchdog) { clearTimeout(watchdog); watchdog = 0; }
     if (!startedAt) startedAt = now;
     var dt = last ? Math.min(64, now - last) : 16;
     last = now;
@@ -217,17 +233,19 @@
     // No animation for people who asked for none: draw the finished run once,
     // and redraw on resize.
     size();
-    ctx.clearRect(0, 0, W, H);
-    drawBack(0);
-    drawFront(0, 999);
+    finishedFrame();
     window.addEventListener('resize', function () {
-      ctx.clearRect(0, 0, W, H);
-      drawBack(0);
-      drawFront(0, 999);
+      size();
+      finishedFrame();
     });
   } else {
     size();
     raf = requestAnimationFrame(frame);
+    // If the loop has not started (backgrounded tab, throttled rAF), paint the
+    // finished string so the hero is never blank.
+    watchdog = setTimeout(function () {
+      if (!startedAt) finishedFrame();
+    }, 600);
   }
 
   window.__lightsReady = true;
