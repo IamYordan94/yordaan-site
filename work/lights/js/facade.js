@@ -442,6 +442,7 @@
     drawSky();
     drawBackdrop();
     drawBlocks();
+    drawShopfronts();
     drawWindows();
     drawWash();
     drawRun(now);
