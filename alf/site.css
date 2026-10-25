@@ -1,0 +1,441 @@
+/* Additions for the static rebuild. style.css is the original compiled stylesheet,
+   untouched — everything I add lives here. */
+
+/* Progressive enhancement: without JS the scroll-reveal elements must still be visible. */
+html:not(.js) .reveal,
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* The wizard fallback text uses the same voice as the rest of the site. */
+[hidden] { display: none !important; }
+
+/* ==========================================================================
+   Programme: an index of the twelve works + a stage the visitor drives.
+   Replaces the auto-scrolling rail (it moved on its own, could not be stopped
+   on touch, and fought the visitor's swipe).
+   ========================================================================== */
+
+.pg { display: grid; gap: 2.25rem; }
+
+@media (min-width: 1024px) {
+  .pg {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 3.5rem;
+    align-items: start;
+  }
+  .pg-index-wrap { grid-area: 1 / 1; }
+  .pg-stage { grid-area: 1 / 2; }
+}
+
+/* ---------- stage ---------- */
+.pg-stage { display: flex; flex-direction: column; gap: 1.35rem; }
+
+.pg-frames {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-deep);
+  border: 2px solid rgba(255, 255, 255, 0.14);
+}
+@media (min-width: 640px) { .pg-frames { aspect-ratio: 16 / 10; } }
+@media (min-width: 1024px) { .pg-frames { aspect-ratio: 4 / 3; } }
+
+.pg-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.pg-frame.is-on { opacity: 1; }
+
+.pg-nav {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.5rem;
+}
+.pg-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: rgba(8, 12, 32, 0.55);
+  color: var(--color-paper);
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.pg-arrow:hover {
+  background: var(--color-paper);
+  border-color: var(--color-paper);
+  color: var(--color-night);
+}
+
+.pg-count {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--color-paper);
+  text-shadow: 0 1px 14px rgba(8, 12, 32, 0.85);
+}
+.pg-sep { margin: 0 0.35rem; font-size: 1rem; opacity: 0.5; }
+
+.pg-hint {
+  position: absolute;
+  left: 0.95rem;
+  top: 0.9rem;
+  z-index: 2;
+  margin: 0;
+  display: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  text-shadow: 0 1px 12px rgba(8, 12, 32, 0.9);
+}
+@media (min-width: 1024px) { .pg-hint { display: block; } }
+
+/* ---------- the written side of the stage ---------- */
+.pg-meta { display: grid; gap: 0.4rem; }
+
+.pg-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(1.45rem, 2.6vw, 2.35rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+}
+.pg-sub {
+  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.pg-desc {
+  margin: 0.55rem 0 0;
+  max-width: 48ch;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+}
+.pg-link {
+  margin-top: 0.4rem;
+  justify-self: start;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-mint);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+.pg-link:hover { border-bottom-color: var(--color-mint); }
+
+/* ---------- index (chips on small screens, list on desktop) ---------- */
+.pg-index-wrap { display: flex; flex-direction: column; gap: 0.9rem; min-width: 0; }
+
+.pg-index-label {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.pg-index {
+  display: flex;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0 0 0.5rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.pg-index::-webkit-scrollbar { display: none; }
+.pg-item { scroll-snap-align: start; }
+
+.pg-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: left;
+  transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+.pg-row:hover { border-color: rgba(255, 255, 255, 0.4); color: var(--color-paper); }
+.pg-row[aria-selected="true"] {
+  border-color: var(--color-mint);
+  background: rgba(119, 210, 182, 0.08);
+  color: var(--color-paper);
+}
+
+.pg-num {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--color-magenta);
+}
+.pg-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.pg-who, .pg-area { display: none; }
+
+@media (min-width: 1024px) {
+  .pg-index {
+    flex-direction: column;
+    gap: 0;
+    max-height: 33rem;
+    padding-right: 0.6rem;
+    overflow-x: visible;
+    overflow-y: auto;
+    scroll-snap-type: y proximity;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  }
+  .pg-index::-webkit-scrollbar { display: block; width: 6px; }
+  .pg-index::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.22); }
+
+  .pg-row {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.85rem;
+    padding: 0.75rem 0.9rem;
+    border: 0;
+    border-left: 2px solid rgba(255, 255, 255, 0.14);
+  }
+  .pg-row:hover { background: rgba(255, 255, 255, 0.04); }
+  .pg-row[aria-selected="true"] {
+    border-left-color: var(--color-mint);
+    background: rgba(119, 210, 182, 0.07);
+  }
+  .pg-who {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .pg-area {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+/* no-JS fallback for the programme section */
+.pg-fallback {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) { .pg-fallback { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .pg-fallback { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.pg-fallback a { color: var(--color-paper); }
+.pg-fallback .pg-fallback-name { font-weight: 700; text-transform: uppercase; }
+.pg-fallback .pg-fallback-meta { color: rgba(255, 255, 255, 0.55); font-size: 0.8rem; }
+
+/* --------------- slideable offer rails (tickets wizard, partner offers) --------------- */
+.offer-rail {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: auto;   /* movement is done by the arrows; see wireRail */
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.25) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+.offer-rail::-webkit-scrollbar { height: 6px; }
+.offer-rail::-webkit-scrollbar-thumb { background: rgba(255,255,255,.22); }
+.offer-rail:focus-visible { outline: 2px solid var(--color-mint); outline-offset: 4px; }
+.offer-slide { flex: 0 0 auto; width: min(88%, 30rem); scroll-snap-align: start; }
+@media (min-width: 768px) { .offer-slide { width: min(58%, 32rem); } }
+@media (min-width: 1280px) { .offer-slide { width: min(40%, 32rem); } }
+.rail-arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem;
+  border: 1px solid rgba(255,255,255,.28);
+  color: var(--color-paper, #fff);
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+.rail-arrow:hover { background: var(--color-paper, #fff); color: var(--color-night, #080c20); border-color: var(--color-paper, #fff); }
+@media (prefers-reduced-motion: reduce) { .offer-rail { scroll-behavior: auto; } }
+
+/* --------- long unbreakable strings must never widen the page on small phones ---------
+   The contact email is 33 characters; at text-lg inside a 320px viewport it pushed the
+   document 12px past the edge. Anything a visitor could make long (emails, phone numbers,
+   URLs, pasted text) is allowed to break. */
+a[href^="mailto:"], a[href^="tel:"], .break-anywhere { overflow-wrap: anywhere; word-break: break-word; }
+/* flex/grid children default to min-width:auto, so long text inside them wins the fight
+   against the viewport; this lets them shrink instead */
+@media (max-width: 480px) {
+  li.flex > * { min-width: 0; }
+  .headline, h1, h2, h3 { overflow-wrap: anywhere; }
+}
+
+/* --------- artwork cards: the number + area + placement chip row must wrap ---------
+   At 320px "Keizersgracht" + "On the canal wall" + the stop number exceed the column and
+   pushed the page 17px wide. Letting the row wrap keeps the chips readable and the page
+   inside the viewport. */
+@media (max-width: 520px) {
+  article .flex.items-center.gap-4 { flex-wrap: wrap; row-gap: 0.5rem; }
+  article .headline { overflow-wrap: anywhere; }
+}
+
+/* --------- thumb-sized links on phones --------- */
+@media (max-width: 640px) {
+  footer a, footer button, a[href^="mailto:"], a[href^="tel:"] { padding-top: 0.35rem; padding-bottom: 0.35rem; display: inline-block; }
+}
+
+/* --------- the embedded GetYourGuide availability widget ---------
+   It is a cross-origin iframe with its own white styling, so it sits in its own
+   framed box and is given more height on phones where its content stacks. */
+.live-avail iframe { background: #fff; }
+@media (max-width: 640px) { .live-avail iframe { height: 430px !important; } }
+
+/* --------- the wizard's columns must be allowed to shrink ---------
+   The offer rails are horizontal scrollers, but their intrinsic width is the whole
+   track (1472px). A grid item defaults to min-width:auto, so the column grew to fit
+   the track and the page scrolled sideways on every phone - step 2 by 376px, step 3
+   by 196px. Letting the columns shrink makes the rail scroll inside its column. */
+#wizard .lg\:col-span-7, #wizard .lg\:col-span-5,
+#wizard .xl\:col-span-8, #wizard .xl\:col-span-4 { min-width: 0; }
+.offer-rail { min-width: 0; max-width: 100%; }
+
+/* --------- the curated GetYourGuide modules on the home page ---------
+   Measured, not guessed: in a 404px column the widget's own document is 404 x 587, so the
+   frame is 592 tall and no internal scrollbar appears. On phones the column is narrower and
+   the widget stacks taller. */
+.live-cruises iframe { background: #fff; }
+@media (max-width: 767px) { .live-cruises iframe { height: 620px !important; } }
+
+/* --------- the booking hub: both platforms, the same weight ---------
+   Styling lives here, not in the markup: the site ships a compiled Tailwind, so any
+   utility class invented in hub.js would simply not exist. */
+.hub-filters { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.hub-filter { background: transparent; border: 2px solid rgba(255, 255, 255, 0.25); color: rgba(255, 255, 255, 0.7); cursor: pointer; font: inherit; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.85rem 1.25rem; transition: border-color 0.2s, color 0.2s, background-color 0.2s; }
+.hub-filter:hover { border-color: #fff; color: #fff; }
+.hub-filter.is-on { background: #77d2b6; border-color: #77d2b6; color: #080c20; }
+
+.hub-block .hub-h2, .hub-h2 { color: #fff; font-family: var(--font-display); font-size: clamp(1.35rem, 3vw, 2rem); line-height: 1.1; margin-top: 3.5rem; }
+.hub-h2-table { margin-top: 4.5rem; }
+.hub-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); margin-top: 1.4rem; }
+
+.hub-card { background: rgba(16, 23, 54, 0.55); border: 2px solid rgba(255, 255, 255, 0.2); display: flex; flex-direction: column; overflow: hidden; }
+.hub-card-img { display: block; height: 200px; object-fit: cover; width: 100%; }
+.hub-body { display: flex; flex-direction: column; gap: 0.7rem; padding: 1.25rem; }
+.hub-body-cta { padding-top: 0; }
+.hub-prov-viator { color: #9db6d6; }
+.hub-prov-gyg { color: #d9556b; }
+.hub-title { color: #fff; font-family: var(--font-display); font-size: 1.15rem; line-height: 1.25; }
+.hub-meta { color: rgba(255, 255, 255, 0.72); font-size: 0.85rem; }
+.hub-note { color: rgba(255, 255, 255, 0.55); font-size: 0.85rem; }
+.hub-foot { align-items: baseline; display: flex; gap: 1rem; justify-content: space-between; margin-top: auto; padding-top: 0.6rem; }
+.hub-price { color: #fff; font-family: var(--font-display); font-size: 1.6rem; }
+.hub-dep { color: rgba(255, 255, 255, 0.5); text-align: right; }
+
+.hub-cta { border: 2px solid #77d2b6; color: #77d2b6; display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; margin-top: 0.4rem; padding: 0.9rem 1rem; text-align: center; text-transform: uppercase; transition: background-color 0.2s, color 0.2s; }
+.hub-cta:hover { background: #77d2b6; color: #080c20; }
+
+.hub-live { border-top: 2px solid rgba(255, 255, 255, 0.12); overflow: hidden; position: relative; }
+.hub-live-note { color: rgba(255, 255, 255, 0.5); padding: 0.9rem 1.25rem 0.6rem; }
+iframe.live-avail { background: #fff; border: 0; display: block; height: 730px; width: 100%; }
+.hub-live-inner { margin: 0 auto; max-width: 560px; }
+.hub-live-note { text-align: center; }
+@media (max-width: 560px) { iframe.live-avail { height: 870px; } }
+
+.hub-tablewrap { margin-top: 1.2rem; overflow-x: auto; }
+.hub-table { border-collapse: collapse; font-size: 0.85rem; min-width: 46rem; text-align: left; width: 100%; }
+.hub-table th, .hub-table td { color: rgba(255, 255, 255, 0.72); padding: 0.75rem 1rem 0.75rem 0; vertical-align: top; }
+.hub-table thead th { color: rgba(255, 255, 255, 0.45); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.hub-table tbody tr { border-top: 1px solid rgba(255, 255, 255, 0.15); }
+.hub-table tbody th { color: #fff; font-weight: 600; }
+.hub-table .hub-strong { color: #fff; font-family: var(--font-display); }
+.hub-table a { color: #77d2b6; text-decoration: underline; }
+.hub-fine { color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; margin-top: 2rem; max-width: 52rem; }
+
+/* --------- the placeholder map: question marks, not positions ---------
+   The route is unpublished, so the markers say so and move. Everything here exists to
+   stop a visitor reading these as real locations. */
+.alf-pin-q { border-color: var(--color-magenta); color: var(--color-magenta); font-family: var(--font-display); font-size: 15px; }
+.alf-legend-unknown { background: transparent; border: 2px solid var(--color-magenta); border-radius: 999px; color: var(--color-magenta); display: inline-block; font-size: 10px; font-weight: 800; height: 14px; line-height: 12px; text-align: center; width: 14px; }
+.alf-legend-unknown::before { content: "?"; }
+.leaflet-marker-icon { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+@media (prefers-reduced-motion: reduce) { .leaflet-marker-icon { transition: none; } }
+
+/* --------- the guide pages (dates / cruises / route / practical) ---------
+   Plain CSS on purpose: the site's Tailwind was compiled long before these pages existed,
+   so utilities invented here (pb-24, md:px-8, text-sky) simply do not exist in style.css. */
+.gd-hero { background: #080c20; padding: 8.5rem 1.25rem 2.5rem; }
+@media (min-width: 768px) { .gd-hero { padding: 11rem 2rem 3.5rem; } }
+.gd-sec { background: #101736; padding: 0 1.25rem 6rem; }
+@media (min-width: 768px) { .gd-sec { padding: 0 2rem 7rem; } }
+.gd-wrap { margin-left: auto; margin-right: auto; max-width: 1080px; }
+.gd-h1 { color: #fff; font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.02; margin-top: 1.1rem; }
+.gd-lede { color: rgba(255, 255, 255, 0.72); font-size: 1.02rem; line-height: 1.75; margin-top: 1.5rem; max-width: 46rem; }
+.gd-lede strong, .gd-p strong { color: #fff; }
+.gd-h2 { color: #fff; font-family: var(--font-display); font-size: clamp(1.35rem, 3vw, 2rem); line-height: 1.1; margin-top: 4rem; }
+.gd-p { color: rgba(255, 255, 255, 0.72); font-size: 0.96rem; line-height: 1.78; margin-top: 1.1rem; max-width: 46rem; }
+.gd-p a, .gd-li a { color: #77d2b6; text-decoration: underline; }
+.gd-subnav { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.4rem; }
+.gd-subnav a { border: 2px solid rgba(255, 255, 255, 0.18); color: rgba(255, 255, 255, 0.7); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; padding: 0.7rem 1rem; text-transform: uppercase; transition: border-color 0.2s, color 0.2s; }
+.gd-subnav a:hover { border-color: rgba(255, 255, 255, 0.5); color: #fff; }
+.gd-subnav a.is-here { border-color: #77d2b6; color: #77d2b6; }
+.gd-facts { border: 2px solid rgba(255, 255, 255, 0.15); margin-top: 2.5rem; }
+.gd-facts div { align-items: baseline; border-top: 1px solid rgba(255, 255, 255, 0.12); display: flex; font-size: 0.92rem; gap: 1.5rem; justify-content: space-between; padding: 0.95rem 1.25rem; }
+.gd-facts div:first-child { border-top: 0; }
+.gd-facts .k { color: rgba(255, 255, 255, 0.55); }
+.gd-facts .v { color: #fff; text-align: right; }
+.gd-cards { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); margin-top: 2.5rem; }
+.gd-card { background: rgba(16, 23, 54, 0.5); border: 2px solid rgba(255, 255, 255, 0.18); display: block; padding: 1.5rem; text-decoration: none; transition: border-color 0.2s, background-color 0.2s; }
+a.gd-card:hover { background: rgba(16, 23, 54, 0.85); border-color: rgba(119, 210, 182, 0.65); }
+.gd-card h3 { color: #fff; font-family: var(--font-display); font-size: 1.3rem; margin-top: 0.7rem; }
+.gd-card p { color: rgba(255, 255, 255, 0.7); font-size: 0.92rem; line-height: 1.68; margin-top: 0.7rem; }
+.gd-card p strong { color: #fff; }
+.gd-faq { border-top: 1px solid rgba(255, 255, 255, 0.14); margin-top: 2rem; }
+.gd-faq details { border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
+.gd-faq summary { color: #fff; cursor: pointer; font-size: 1rem; font-weight: 600; list-style: none; padding: 1.15rem 2.5rem 1.15rem 0.25rem; position: relative; }
+.gd-faq summary::-webkit-details-marker { display: none; }
+.gd-faq summary::after { color: #77d2b6; content: "+"; font-size: 1.4rem; position: absolute; right: 0.4rem; top: 50%; transform: translateY(-50%); }
+.gd-faq details[open] summary::after { content: "\2013"; }
+.gd-faq .a { color: rgba(255, 255, 255, 0.72); font-size: 0.94rem; line-height: 1.78; max-width: 46rem; padding: 0 0.25rem 1.35rem; }
+.gd-cta { align-items: center; border: 2px solid #77d2b6; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; margin-top: 4rem; padding: 2rem; }
+.gd-cta h2 { color: #fff; font-family: var(--font-display); font-size: clamp(1.3rem, 2.6vw, 1.9rem); }
+.gd-cta p { color: rgba(255, 255, 255, 0.7); font-size: 0.92rem; margin-top: 0.6rem; max-width: 34rem; }
+.gd-note { background: rgba(220, 184, 119, 0.07); border-left: 3px solid #dcb877; color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.72; margin-top: 2.5rem; padding: 0.9rem 1.1rem; }
+@media (max-width: 560px) { .gd-cta { padding: 1.4rem; } }
