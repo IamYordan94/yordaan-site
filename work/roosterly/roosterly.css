@@ -14,7 +14,7 @@
   --gut:clamp(1.15rem,4vw,3rem);
   --crewcol:3.6rem;
   --headh:1.55rem;
-  --cellh:1.95rem;
+  --cellh:2.15rem;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -394,7 +394,7 @@ section{padding-block:clamp(2.25rem,5vw,4rem)}
 
 /* ---------- wider ---------- */
 @media (min-width:880px){
-  :root{--crewcol:4.6rem;--headh:1.9rem;--cellh:2.85rem}
+  :root{--crewcol:4.6rem;--headh:1.9rem;--cellh:3rem}
   .hero-grid{
     grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
     gap:clamp(2.5rem,4vw,3.75rem);

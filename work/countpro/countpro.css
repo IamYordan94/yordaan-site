@@ -133,7 +133,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .gauge-stage{
   display:grid;
   grid-template-columns:2px minmax(0,1fr);
-  gap:clamp(5px,1.2vw,9px);
+  gap:0;
   transition:opacity .45s ease;
 }
 .gauge.is-resetting .gauge-stage{opacity:0}
@@ -175,7 +175,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .gauge-note{
   margin:0;
   padding-top:.7rem;
-  border-top:1px solid var(--rule);
   font-size:.72rem;letter-spacing:.02em;
   color:var(--muted);
 }
@@ -262,7 +261,7 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   border-bottom:1px solid var(--rule);
   padding-block:clamp(2rem,4vw,3.25rem);
 }
-.cta .marker{display:block;margin:0 0 1rem}
+.cta .section-head{border-bottom:0;padding-bottom:0;margin-bottom:0}
 .cta h2{
   margin:0;
   font-family:var(--display);
@@ -272,10 +271,9 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   line-height:1.1;
   max-width:24ch;
 }
-.cta-note{margin:.9rem 0 0;max-width:52ch;color:var(--muted)}
 .cta-link{
   display:inline-block;
-  margin-top:clamp(1.5rem,3vw,2.25rem);
+  margin-top:clamp(1.75rem,3vw,2.5rem);
   font-family:var(--display);
   font-size:clamp(1.85rem,1.05rem + 4vw,3.4rem);
   line-height:1.05;
@@ -335,6 +333,7 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   }
   .top nav a{padding-block:.45rem;border-bottom:0}
   .rows li{grid-template-columns:1.6rem minmax(0,1fr)}
+  .site-footer nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem 1rem;width:100%}
 }
 
 @media (prefers-reduced-motion:reduce){

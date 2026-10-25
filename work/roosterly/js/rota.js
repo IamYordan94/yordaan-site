@@ -26,7 +26,7 @@
   var STEP = 120;        // ms between blocks dropping in
   var GAP_AT = 520;      // ms after the last block, before the gap shows
   var HOLD = 1850;       // ms to sit with a finished week
-  var RESTART = 700;     // ms after clearing, before it starts again
+  var RESTART = 520;     // ms after clearing, before it starts again
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

@@ -58,15 +58,15 @@
     var rand = rng(42180735);
     var i, j, c;
 
-    var roofMin = H * 0.17;
-    var roofMax = H * 0.31;
+    var roofMin = H * 0.12;
+    var roofMax = H * 0.27;
 
     // Rooftops behind the street, above the main roofline: only silhouettes.
     backdrop = [];
     var bx = -W * 0.06;
     while (bx < W * 1.06) {
       var bw = W * (0.05 + rand() * 0.09);
-      var bh = roofMin * (0.45 + rand() * 0.7);
+      var bh = roofMin * (0.5 + rand() * 0.85);
       backdrop.push({ x: bx, w: bw, y: roofMin - bh, h: bh + H * 0.2 });
       bx += bw * (1 + rand() * 0.45);
     }
@@ -84,10 +84,10 @@
     }
 
     var tones = [
-      ['#18181f', '#101014'],
-      ['#141419', '#0d0d11'],
-      ['#1a1a21', '#111116'],
-      ['#15151b', '#0e0e12']
+      ['#262632', '#15151b'],
+      ['#1f1f2a', '#121217'],
+      ['#2a2a36', '#16161d'],
+      ['#22222d', '#131318']
     ];
 
     var x = -W * 0.06;
@@ -134,7 +134,7 @@
 
     // One festoon, strung at a constant height across every facade.
     spanW = W / (W < 560 ? 2 : 3);
-    runY = H * 0.40;
+    runY = H * 0.45;
     sagAmp = H * 0.045;
     bulbR = clamp(2.2 + H * 0.005, 2.4, 4.4);
 
@@ -446,6 +446,11 @@
     renderStatic();
   } else {
     start();
+    // A backgrounded tab throttles requestAnimationFrame to a standstill; if no
+    // frame has run by then, paint the finished facade rather than leave a hole.
+    window.setTimeout(function () {
+      if (!lastFrame) { renderStatic(); }
+    }, 900);
   }
 
   var resizeTimer;

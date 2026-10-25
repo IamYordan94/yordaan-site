@@ -207,7 +207,6 @@
   }
 
   function frame(now) {
-    if (watchdog) { clearTimeout(watchdog); watchdog = 0; }
     if (!startedAt) startedAt = now;
     var dt = last ? Math.min(64, now - last) : 16;
     last = now;
@@ -245,8 +244,10 @@
   } else {
     raf = requestAnimationFrame(frame);
     watchdog = setTimeout(function () {
-      if (!startedAt) finishedFrame();
-    }, 600);
+      // A single frame may run and then stall (throttled tab). If the install has
+      // not actually progressed, paint the finished run instead of leaving white.
+      if (progress < 0.05) finishedFrame();
+    }, 900);
   }
 
   window.__lightsReady = true;
