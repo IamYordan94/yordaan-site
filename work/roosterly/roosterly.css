@@ -474,3 +474,18 @@ section{padding-block:clamp(2.25rem,4.5vw,3.5rem)}
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+
+/* the one next step on the page: ask to be kept posted */
+.status-cta{margin:1.6rem 0 0}
+.status-cta a{
+  display:inline-block;
+  font-size:.95rem;
+  letter-spacing:.02em;
+  text-decoration:none;
+  color:var(--paper,#fff);
+  background:var(--accent,#1f3ae0);
+  padding:.75rem 1.15rem;
+  border:1px solid var(--accent,#1f3ae0);
+}
+.status-cta a:hover{background:var(--ink,#0b0b0c);border-color:var(--ink,#0b0b0c)}
+.status-cta a:focus-visible{outline:2px solid var(--ink,#0b0b0c);outline-offset:3px}
