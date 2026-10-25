@@ -30,8 +30,8 @@
   var ACCENT = [31, 58, 224];
 
   function bandHeight() {
-    // The scene owns the top of the hero: 30% on phones, 38% on wider screens.
-    return H * (W < 700 ? 0.30 : 0.38);
+    // The scene owns the top of the hero: 30% on phones, 46% on wider screens.
+    return H * (W < 700 ? 0.34 : 0.46);
   }
 
   function size() {
@@ -172,7 +172,7 @@
       var near = Math.hypot(pointer.x - x, pointer.y - y);
       var pull = near < 210 ? (1 - near / 210) : 0;
 
-      var radius = 5.2 * (1 + pull * 0.28);
+      var radius = 7.6 * (1 + pull * 0.28);
       var alpha = breathe * b.ign + pull * 0.2;
       var glow = (0.62 + 0.38 * breathe) * b.ign + pull * 1.2;
 

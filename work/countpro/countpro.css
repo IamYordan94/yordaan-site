@@ -11,7 +11,7 @@
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --wrap:1180px;
   --gut:clamp(1.1rem,4vw,3rem);
-  --row:clamp(44px,6vw,54px);
+  --row:clamp(44px,5.2vw,60px);
   --rows:7;
 }
 
@@ -101,6 +101,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   margin:0 0 clamp(1rem,2.5vw,1.5rem);
   font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--muted);
+  text-wrap:balance;
 }
 .hero h1{
   margin:0;
@@ -121,21 +122,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .problem{margin:1rem 0 0;max-width:56ch;color:var(--muted)}
 
 /* ---------- the counting instrument ---------- */
-.gauge{
-  margin:0;min-width:0;
-  border-top:1px solid var(--ink);
-  padding-top:.85rem;
-}
+.gauge{margin:0;min-width:0}
 .gauge-head{
   display:flex;justify-content:space-between;gap:1rem;
   font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--muted);
-  padding-bottom:.8rem;
+  padding-bottom:.65rem;
+  border-bottom:1px solid var(--ink);
 }
 .gauge-stage{
   display:grid;
   grid-template-columns:2px minmax(0,1fr);
-  gap:clamp(.85rem,2.5vw,1.4rem);
+  gap:clamp(5px,1.2vw,9px);
   transition:opacity .45s ease;
 }
 .gauge.is-resetting .gauge-stage{opacity:0}
@@ -167,7 +165,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 }
 .gauge-list .num{
   font-family:var(--display);
-  font-size:calc(var(--row) * .52);
+  font-size:calc(var(--row) * .56);
   letter-spacing:-.01em;
   color:var(--muted);
   font-variant-numeric:tabular-nums lining-nums;
@@ -175,7 +173,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 }
 .gauge-list li:last-child .num{color:var(--accent)}
 .gauge-note{
-  margin:.85rem 0 0;
+  margin:0;
   padding-top:.7rem;
   border-top:1px solid var(--rule);
   font-size:.72rem;letter-spacing:.02em;
@@ -248,16 +246,15 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   color:var(--muted);
 }
 .aside{
-  margin:clamp(1.5rem,3vw,2.25rem) 0 0;
-  padding-left:1rem;
-  border-left:2px solid var(--rule);
+  margin:clamp(1.5rem,3vw,2rem) 0 0;
   max-width:60ch;
-  font-size:.95rem;
+  font-size:.92rem;
+  line-height:1.62;
   color:var(--muted);
 }
 
 /* ---------- prose ---------- */
-.prose p{margin:0;max-width:64ch}
+.prose p{margin:0;max-width:62ch}
 
 /* ---------- the link ---------- */
 .cta{
@@ -315,7 +312,7 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
 .site-footer nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
 .footer-legal{
   margin:0 0 .7rem;
-  font-size:.75rem;line-height:1.7;
+  font-size:.78rem;line-height:1.72;
   color:var(--muted);
   max-width:88ch;
 }

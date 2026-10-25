@@ -387,6 +387,16 @@ section{padding-block:clamp(2.25rem,4.5vw,4rem)}
   .mode h3{font-size:1.28rem}
   .mode-board{width:96px;height:96px}
 }
+@media (max-width:859px){
+  /* On a phone the board follows the lede: the argument before the detail. */
+  .hero-copy{display:contents}
+  .kicker{order:1}
+  .hero h1{order:2}
+  .hero-lede{order:3}
+  .board{order:4;max-width:100%;margin-top:clamp(1.5rem,5vw,2rem)}
+  .hero-body{order:5}
+  .hero-cta{order:6}
+}
 @media (max-width:639px){
   .top-inner{gap:.9rem 1rem}
   .top nav{margin-left:0;width:100%;gap:1rem}
