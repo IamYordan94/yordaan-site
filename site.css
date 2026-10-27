@@ -404,12 +404,16 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
   /* fade the cut ends so it reads as a run of garland, not a cropped photo */
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
   mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
-  opacity:0;
-  transform:translateY(-14px) rotate(-.6deg);
-  animation:garland-hang .85s cubic-bezier(.22,1.2,.36,1) .15s forwards;
+  /* visible by default: the animation only ever adds the drop. A throttled tab,
+     a disabled animation or a very slow device must never end up with an
+     invisible gap where the garland should be. */
+  opacity:1;
+  transform:none;
+  animation:garland-hang .85s cubic-bezier(.22,1.2,.36,1) .15s both;
   will-change:transform,opacity;
 }
 @keyframes garland-hang{
+  0%{opacity:0;transform:translateY(-14px) rotate(-.6deg)}
   60%{opacity:1;transform:translateY(3px) rotate(.15deg)}
   100%{opacity:1;transform:translateY(0) rotate(0)}
 }
