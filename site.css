@@ -409,13 +409,15 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
      invisible gap where the garland should be. */
   opacity:1;
   transform:none;
-  animation:garland-hang .85s cubic-bezier(.22,1.2,.36,1) .15s both;
-  will-change:transform,opacity;
+  /* transform only: opacity must not be in the keyframes, or a tab that never
+     advances animations would hold the strip at the invisible first frame. */
+  animation:garland-hang .8s cubic-bezier(.22,1.2,.36,1) both;
+  will-change:transform;
 }
 @keyframes garland-hang{
-  0%{opacity:0;transform:translateY(-14px) rotate(-.6deg)}
-  60%{opacity:1;transform:translateY(3px) rotate(.15deg)}
-  100%{opacity:1;transform:translateY(0) rotate(0)}
+  0%{transform:translateY(-18px) rotate(-.7deg)}
+  60%{transform:translateY(4px) rotate(.18deg)}
+  100%{transform:translateY(0) rotate(0)}
 }
 @media (max-width:640px){
   .garland-strip{
