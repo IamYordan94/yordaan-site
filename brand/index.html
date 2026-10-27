@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand board — Yordan Creatives</title>
+<meta name="description" content="Internal brand board: the peace-hand lockup, the palette with measured contrast ratios, the two banners, the copy lines and the rules for using them.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="../assets/brand/submark-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="../assets/brand/submark-180.png">
+<link rel="stylesheet" href="../brand.css">
+</head>
+<body class="brand-page">
+
+<header class="brand-page__bar">
+  <div class="brand-page__bar-in">
+    <a class="brand-lockup brand-lockup--bare" href="../index.html" style="--lockup-w:7rem">
+      <img class="brand-lockup__mark" src="../assets/brand/logo-header.png"
+           alt="Yordan Creatives" width="600" height="428">
+    </a>
+    <p>Brand board · v1 · internal</p>
+  </div>
+</header>
+
+<main>
+  <section class="brand-section brand-wrap">
+    <p class="brand-kicker">Yordan Creatives — identity</p>
+    <h1 class="brand-lede">Peace in every project.</h1>
+    <p class="brand-note">
+      One studio, two kinds of work: building things on site, and building software at a desk.
+      The identity is a near-black and bone two-tone system with a single hand-drawn mark.
+      This page is the reference sheet for it — <strong>it is not linked from the site navigation yet</strong>,
+      and it is written so it can be read without any of the original design files.
+    </p>
+  </section>
+
+  <section class="brand-section brand-wrap" aria-labelledby="mark">
+    <div class="brand-section__head">
+      <h2 id="mark">01 — The mark</h2>
+      <p>
+        A hand-drawn brush script: the peace-hand forms the first letter, two fingers making the V,
+        the wrist sweeping on into the word. A brush underline grounds it and a loose circular swash
+        closes it; <span style="letter-spacing:.16em">CREATIVES</span> sits beneath in wide-tracked capitals.
+      </p>
+    </div>
+
+    <div class="brand-specimens">
+      <figure class="brand-specimen">
+        <div class="brand-specimen__stage">
+          <span class="brand-plate">
+            <img src="../assets/brand/logo-header.png" alt="The Yordan Creatives lockup: brush script with the peace-hand first letter, on its black background."
+                 width="600" height="428" style="width:min(100%,17.5rem)">
+          </span>
+        </div>
+        <figcaption>Lockup on a plate · 600&nbsp;×&nbsp;428</figcaption>
+      </figure>
+
+      <figure class="brand-specimen brand-specimen--dark">
+        <div class="brand-specimen__stage">
+          <img src="../assets/brand/logo-header.png" alt="The lockup laid directly on near-black, its authored background."
+               width="600" height="428" style="width:min(100%,17.5rem)">
+        </div>
+        <figcaption>Lockup on near-black · #0A0A0A</figcaption>
+      </figure>
+
+      <figure class="brand-specimen brand-specimen--dark">
+        <div class="brand-specimen__stage" style="display:flex;gap:1.5rem;align-items:center">
+          <img class="brand-submark" src="../assets/brand/submark-512.png" alt="The peace-hand submark."
+               width="512" height="512" style="--submark-w:6rem">
+          <img class="brand-submark" src="../assets/brand/submark-64.png" alt=""
+               width="64" height="64" style="--submark-w:4rem" aria-hidden="true">
+        </div>
+        <figcaption>Submark · 512 and 64&nbsp;px · favicon, avatar</figcaption>
+      </figure>
+    </div>
+
+    <p class="brand-note" style="margin-top:1.5rem">
+      <strong>The script is artwork, not a typeface.</strong> Those letters exist only as pixels inside
+      the owner's PNG — there is no font file, no webfont is loaded anywhere on this site, and nothing here
+      sets the wordmark in type. Where a script-like line is needed in running copy, the site uses
+      <em style="font-family:var(--script)">Georgia italic</em> and says so; it is an honest approximation,
+      never a stand-in for the mark.
+    </p>
+    <p class="brand-note" style="margin-top:.75rem">
+      <strong>The artwork is not transparent.</strong> It was drawn on near-black <code>#0F0D0D</code>, and that
+      background is kept. When the mark has to sit on white, wrap it in <code>.brand-plate</code> so the black
+      reads as a deliberate panel instead of a stray rectangle. No cut-out version has been faked.
+    </p>
+  </section>
+
+  <section class="brand-section brand-wrap" aria-labelledby="palette">
+    <div class="brand-section__head">
+      <h2 id="palette">02 — Palette</h2>
+      <p>
+        Six flat colours. The sunset oranges on the identity board are photographic, not brand colours —
+        they are not tokens. Ratios are WCAG 2.1 contrast, measured on the pair named in each card.
+      </p>
+    </div>
+
+    <div class="brand-palette">
+      <figure class="brand-swatch">
+        <div class="brand-swatch__chip" style="background:#0A0A0A;color:#F4EFE5">#0A0A0A</div>
+        <div class="brand-swatch__body">
+          <p class="brand-swatch__name">Near-black · <code>--dark</code></p>
+          <p class="brand-swatch__use">The ground. Dark sections, banners, the plate behind the mark.</p>
+          <p class="brand-swatch__ratio"><b>17.28 : 1</b> bone text on it</p>
+        </div>
+      </figure>
+
+      <figure class="brand-swatch">
+        <div class="brand-swatch__chip" style="background:#2F3232;color:#F4EFE5">#2F3232</div>
+        <div class="brand-swatch__body">
+          <p class="brand-swatch__name">Charcoal · <code>--charcoal</code></p>
+          <p class="brand-swatch__use">Second dark. Texture, panels, quiet bands inside dark layouts.</p>
+          <p class="brand-swatch__ratio"><b>11.29 : 1</b> bone text on it</p>
+        </div>
+      </figure>
+
+      <figure class="brand-swatch">
+        <div class="brand-swatch__chip" style="background:#0F0D0D;color:#E7DFD2">#0F0D0D</div>
+        <div class="brand-swatch__body">
+          <p class="brand-swatch__name">Artwork black · <code>--art-black</code></p>
+          <p class="brand-swatch__use">Not a design choice but a fact: the black the mark was drawn on.</p>
+          <p class="brand-swatch__ratio"><b>16.91 : 1</b> bone text on it</p>
+        </div>
+      </figure>
+
+      <figure class="brand-swatch">
+        <div class="brand-swatch__chip" style="background:#E7DFD2;color:#0b0b0c">#E7DFD2</div>
+        <div class="brand-swatch__body">
+          <p class="brand-swatch__name">Stone · <code>--stone</code></p>
+          <p class="brand-swatch__use">Quiet warm light: rules on dark, captions, secondary text.</p>
+          <p class="brand-swatch__ratio"><b>14.88 : 1</b> ink text on it</p>
+        </div>
+      </figure>
+
+      <figure class="brand-swatch">
+        <div class="brand-swatch__chip" style="background:#F4EFE5;color:#0b0b0c">#F4EFE5</div>
+        <div class="brand-swatch__body">
+          <p class="brand-swatch__name">Bone · <code>--bone</code></p>
+          <p class="brand-swatch__use">The mark's own ink and all type on dark. Warm, never cream-paper.</p>
+          <p class="brand-swatch__ratio"><b>17.17 : 1</b> ink text on it</p>
+        </div>
+      </figure>
+
+      <figure class="brand-swatch">
+        <div class="brand-swatch__chip" style="background:#ffffff;color:#0b0b0c;border-bottom:1px solid #e2e2e6">#FFFFFF</div>
+        <div class="brand-swatch__body">
+          <p class="brand-swatch__name">Paper · <code>--paper</code></p>
+          <p class="brand-swatch__use">Light pages stay white. Bone is a surface for brief moments, not a page colour.</p>
+          <p class="brand-swatch__ratio"><b>19.67 : 1</b> ink text on it</p>
+        </div>
+      </figure>
+    </div>
+
+    <p class="brand-note" style="margin-top:1.25rem">
+      Working greys and the one action colour come from the existing site, unchanged:
+      <code>--muted #5a5a62</code> (6.83 : 1 on paper), <code>--rule #e2e2e6</code>,
+      <code>--accent #1f3ae0</code> (7.66 : 1 on paper, and 7.66 : 1 for paper on it).
+      Every step below 14 : 1 is still far past the 4.5 : 1 AA threshold; nothing here relies on
+      low-contrast grey for body copy.
+    </p>
+  </section>
+
+  <section class="brand-section brand-wrap" aria-labelledby="banners">
+    <div class="brand-section__head">
+      <h2 id="banners">03 — Banners</h2>
+      <p>
+        Two wide compositions built as single offline SVG files: no photograph, no external font, no
+        network request. The atmosphere is gradients plus a low angular ridge, and the mark is the
+        owner's PNG embedded in the file.
+      </p>
+    </div>
+
+    <figure class="brand-banner">
+      <img src="../assets/brand/banner.svg" width="1600" height="500"
+           alt="Social banner: near-black ground, services at left, the brush lockup centred, Create / Build / Grow stacked at right with a brush underline.">
+      <figcaption><span><code>banner.svg</code> · 1600 × 500 · social</span><span>logo centred · services left · Create / Build / Grow right</span></figcaption>
+    </figure>
+
+    <figure class="brand-banner">
+      <img src="../assets/brand/hero-banner.svg" width="1920" height="600"
+           alt="Wide hero: services column at left, brush lockup centred, CREATE • BUILD • GROW and Peace in every project at right, over a graded near-black with a ridge silhouette.">
+      <figcaption><span><code>hero-banner.svg</code> · 1920 × 600 · hero</span><span>three-part: services · mark · promise</span></figcaption>
+    </figure>
+
+    <figure class="brand-banner brand-banner--crop">
+      <img src="../assets/brand/hero-banner.svg" width="1920" height="600"
+           alt="The wide hero banner cropped to a 16:9 box with object-fit cover.">
+      <figcaption><span>16 : 9 crop · <code>object-fit:cover</code></span><span>the mark and ridge stay inside the centre safe zone</span></figcaption>
+    </figure>
+
+    <p class="brand-note">
+      Both files carry an internal <code>@media (max-width: 760px)</code> rule: below that width the side
+      columns switch off and the mark takes the full height, so a 390 px phone gets a clean centred mark
+      instead of three columns of unreadable 6 px type. The preview harness at
+      <code>assets/brand/preview.html</code> renders every variant, including the 390 px crops.
+    </p>
+  </section>
+
+  <section class="brand-section brand-wrap" aria-labelledby="copy">
+    <div class="brand-section__head">
+      <h2 id="copy">04 — Copy</h2>
+      <p>
+        Short, declarative, no adjectives doing work that the pictures should do. The three service words
+        and the three promise words are the fixed set; the tagline stays in the italic approximation, never
+        in the brush script.
+      </p>
+    </div>
+
+    <div class="brand-copy">
+      <div class="brand-copy__card">
+        <h3>Services — slashes</h3>
+        <p class="brand-services"><span>Ideas</span><span>Design</span><span>Digital</span></p>
+        <p class="brand-services"><span>Brands</span><span>Apps</span><span>Content</span></p>
+      </div>
+
+      <div class="brand-copy__card">
+        <h3>Services — stacked</h3>
+        <p class="brand-services brand-services--stack"><span>Ideas</span><span>Design</span><span>Digital</span></p>
+      </div>
+
+      <div class="brand-copy__card">
+        <h3>Promise — dots</h3>
+        <p class="brand-promise"><span>Create</span><span>Build</span><span>Grow</span></p>
+        <p class="brand-handle">@yordancreatives</p>
+      </div>
+
+      <div class="brand-copy__card brand-copy__card--dark">
+        <h3>On near-black</h3>
+        <p class="brand-promise"><span>Create</span><span>Build</span><span>Grow</span></p>
+        <p class="brand-tagline">Peace in every project</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="brand-section brand-wrap" aria-labelledby="rules">
+    <div class="brand-section__head">
+      <h2 id="rules">05 — Do &amp; don't</h2>
+      <p>Short list, enforced by what the assets can actually do — not by taste alone.</p>
+    </div>
+
+    <div class="brand-rules">
+      <div class="brand-rules__col brand-rules__col--do">
+        <h3>Do</h3>
+        <ul>
+          <li>Keep the mark big and uncrowded: 600 px wide in a header, no smaller than ~90 px before it stops reading.</li>
+          <li>Use bone on near-black, or ink on white. Those two pairs are 17 : 1 and 19 : 1.</li>
+          <li>Let the black around the mark be deliberate: a plate on white, full bleed on dark.</li>
+          <li>Set the supporting words in the site's sans with wide tracking, so the brush script stays the only handwriting.</li>
+          <li>Say "approximation" when Georgia italic stands in for the script. It is not the mark.</li>
+        </ul>
+      </div>
+      <div class="brand-rules__col brand-rules__col--dont">
+        <h3>Don't</h3>
+        <ul>
+          <li>Recolour the artwork, invert it, or trace it into a "font".</li>
+          <li>Put it on cream or beige — bone as a page background was vetoed, and a warm field fights the brush.</li>
+          <li>Drop the opaque PNG on a gradient without a plate or matte; the rectangle shows.</li>
+          <li>Stretch or squash it: the lockup is 600 × 428 and holds that ratio.</li>
+          <li>Add a second script face or a display font. There are no webfonts on this site, by design.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="brand-wrap">
+  <p><strong>Files in this layer</strong></p>
+  <p>
+    <code>assets/brand/logo.png</code> (1254² original) ·
+    <code>logo-header.png</code> (600 × 428, trimmed) ·
+    <code>submark-512.png</code> · <code>submark-180.png</code> · <code>submark-64.png</code> ·
+    <code>banner.svg</code> · <code>hero-banner.svg</code> ·
+    <code>assets/brand/preview.html</code> ·
+    <code>brand.css</code> · <code>brand/index.html</code>
+  </p>
+  <p>
+    Not linked from the site navigation. The script wordmark cannot be reproduced exactly in type —
+    it is the owner's drawing and is used only as artwork.
+  </p>
+</footer>
+
+</body>
+</html>

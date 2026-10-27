@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Banner preview — Yordan Creatives brand assets</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="submark-64.png" sizes="64x64">
+<style>
+  :root{--dark:#0A0A0A;--bone:#F4EFE5;--char:#2F3232;--stone:#E7DFD2;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--dark);color:var(--bone);
+       font:15px/1.6 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+  header{border-bottom:1px solid #ffffff1f;padding:28px 32px 22px}
+  h1{margin:0 0 6px;font:italic 26px/1.2 Georgia,serif;font-weight:400}
+  header p{margin:0;color:#F4EFE5a6;font-size:13px;letter-spacing:.02em}
+  main{padding:32px}
+  section{margin:0 0 46px}
+  h2{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#F4EFE5a6;
+     font-weight:500;margin:0 0 14px}
+  figure{margin:0 0 26px}
+  img{display:block;width:100%;height:auto;border-radius:2px;background:#0F0D0D}
+  figcaption{margin-top:10px;font-size:12px;color:#F4EFE5a6;letter-spacing:.02em}
+  .ratio16-9{aspect-ratio:16/9;overflow:hidden;border-radius:2px}
+  .ratio16-9 img{height:100%;object-fit:cover;object-position:center}
+  .narrow{width:390px;max-width:100%;border:1px dashed #ffffff33;padding:0}
+  .narrow .ratio16-9{border-radius:0}
+  .row{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+  .tile{padding:22px;background:#0F0D0D;border:1px solid #ffffff14;max-width:100%}
+  .tile img{max-width:100%}
+  code{font-size:12px;color:#E7DFD2}
+  footer{padding:0 32px 44px;color:#F4EFE5a6;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Banner assets — preview harness</h1>
+  <p>Direct render of <code>assets/brand/banner.svg</code> and <code>hero-banner.svg</code>. Not linked from the site; internal QA only.</p>
+</header>
+<main>
+  <section>
+    <h2>Social banner — 1600 × 500</h2>
+    <figure>
+      <img src="banner.svg" alt="Yordan Creatives social banner: brush wordmark centred, Create Build Grow at right." width="1600" height="500" data-expect="1600">
+      <figcaption>banner.svg — native 1600 × 500. Below 760 px wide the SVG switches to its stacked mobile composition.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Wide hero banner — 1920 × 600</h2>
+    <figure>
+      <img src="hero-banner.svg" alt="Yordan Creatives wide hero: services left, brush wordmark centre, promise right." width="1920" height="600" data-expect="1920">
+      <figcaption>hero-banner.svg — native 1920 × 600, built as a 16:9-safe crop.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>16:9 crop, desktop container</h2>
+    <figure>
+      <div class="ratio16-9"><img src="hero-banner.svg" alt="Hero banner cropped to 16:9." data-expect="1920"></div>
+      <figcaption><code>object-fit:cover</code> — the ridge line and logo stay inside the centre safe zone.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>390 px — mobile crop</h2>
+    <div class="row">
+      <figure class="narrow">
+        <div class="ratio16-9"><img src="banner.svg" alt="Social banner cropped at 390 pixels wide." data-expect="1600"></div>
+        <figcaption>social · 390 wide</figcaption>
+      </figure>
+      <figure class="narrow">
+        <div class="ratio16-9"><img src="hero-banner.svg" alt="Hero banner cropped at 390 pixels wide." data-expect="1920"></div>
+        <figcaption>hero · 390 wide</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Marks</h2>
+    <div class="row">
+      <div class="tile"><img src="logo-header.png" alt="Yordan Creatives lockup." width="600" height="428" style="width:300px;height:auto" data-expect="600"></div>
+      <div class="tile"><img src="submark-512.png" alt="Peace-hand submark." width="512" height="512" style="width:120px;height:auto" data-expect="512"></div>
+    </div>
+  </section>
+</main>
+<footer>Files: banner.svg · hero-banner.svg · logo.png · logo-header.png · submark-512.png · submark-180.png · submark-64.png</footer>
+</body>
+</html>
