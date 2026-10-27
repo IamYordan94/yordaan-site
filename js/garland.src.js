@@ -573,11 +573,10 @@
       L = g.leds[i];
       tw = 0.62 + 0.38 * Math.sin(t * 0.001 * L.sp + L.ph);
       x = L.x; y = L.y + g.spring;
-      c.globalAlpha = 0.62 + 0.36 * tw;
-      c.fillStyle = "rgba(255,250,232,1)";
-      c.beginPath();
-      c.arc(x, y + L.r * 0.16, L.r * (0.5 + 0.1 * tw), 0, 6.2832);
-      c.fill();
+      /* the bulb: a warm filament inside glass, not a flat white dot */
+      var cr = L.r * (1.15 + 0.2 * tw);
+      c.globalAlpha = 0.75 + 0.25 * tw;
+      c.drawImage(glow(), x - cr, y + L.r * 0.16 - cr, cr * 2, cr * 2);
       c.globalAlpha = 1;
     }
   }
