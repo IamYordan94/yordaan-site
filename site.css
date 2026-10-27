@@ -388,3 +388,39 @@ section{padding-block:clamp(2.5rem,5vw,4.5rem)}
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+
+/* ---------- the garland, hung ----------
+   A photographic garland (generated for this site, white background so it sits
+   on the page without a keyed edge) that drops into place and then hangs still.
+   It scales with its container, so it fits whatever it is hung on. */
+.garland-strip{
+  --strip-h: clamp(96px,15vw,150px);
+  height:var(--strip-h);
+  margin:clamp(-.6rem,0vw,0rem) 0 clamp(1rem,2.5vw,2rem);
+  background-image:url("assets/garland-strip.webp");
+  background-repeat:no-repeat;
+  background-position:left center;
+  background-size:auto 100%;
+  /* fade the cut ends so it reads as a run of garland, not a cropped photo */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+  opacity:0;
+  transform:translateY(-14px) rotate(-.6deg);
+  animation:garland-hang .85s cubic-bezier(.22,1.2,.36,1) .15s forwards;
+  will-change:transform,opacity;
+}
+@keyframes garland-hang{
+  60%{opacity:1;transform:translateY(3px) rotate(.15deg)}
+  100%{opacity:1;transform:translateY(0) rotate(0)}
+}
+@media (max-width:640px){
+  .garland-strip{
+    --strip-h:clamp(64px,18vw,96px);
+    background-image:url("assets/garland-strip-mobile.webp");
+    background-size:100% auto;
+    background-position:left top;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .garland-strip{opacity:1;transform:none;animation:none}
+}
