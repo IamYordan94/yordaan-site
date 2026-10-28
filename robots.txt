@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /alf/
 
 Sitemap: https://yordaan.com/sitemap.xml
+Sitemap: https://yordaan.com/alf/sitemap.xml
